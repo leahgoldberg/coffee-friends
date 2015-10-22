@@ -10,8 +10,7 @@ class CafesController < ApplicationController
   end
 
   def show
-    @cafe = Cafe.find_by(slug: params[:id])
-    @cafe = current_cafe unless @cafe
+    @cafe = current_cafe || Cafe.find_by(slug: params[:id])
     @menu_item = MenuItem.new
     @menu_items = @cafe.menu_items
     @charitable_gifts = @cafe.unredeemed_charitable_gifts
