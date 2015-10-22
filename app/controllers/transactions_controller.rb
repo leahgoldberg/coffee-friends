@@ -8,8 +8,7 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    result = TransactionHandler.send_payment!(session, params)
-    if result.success?
+    if TransactionHandler.send_payment!(session, params).success?
       flash[:notice] = "Success!"
       @coffee_gift = CoffeeGift.find_by(id: session[:tmp_id])
       flash[:twilio_error] = TwilioTextSender.send!(@coffee_gift)

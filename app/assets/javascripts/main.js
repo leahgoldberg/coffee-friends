@@ -3,7 +3,7 @@ $(document).ready(function() {
   initRegistrationPopups();
 
   if ($('#map').length) {
-    initMap()
+    initMap();
   }
 
   if ($('.tags-topbar').length) {

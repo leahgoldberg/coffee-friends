@@ -21,11 +21,11 @@ class Cafe < ActiveRecord::Base
 	end
 
 	def unredeemed_coffee_gifts
-		self.coffee_gifts.where('redeemed = ?', false)
+		coffee_gifts.where(redeemed: false)
 	end
 
 	def redeemed_coffee_gifts
-		self.coffee_gifts.where('redeemed = ?', true)
+		coffee_gifts.where(redeemed: true)
 	end
 
 	def self.filter_by_borough(tag)
@@ -37,7 +37,7 @@ class Cafe < ActiveRecord::Base
 	end
 
 	def search_non_charitable_gifts(search)
-  	self.unredeemed_coffee_gifts.where("redemption_code LIKE ? AND charitable = ?", "%#{search}%", false)
+  	unredeemed_coffee_gifts.where("redemption_code LIKE ? AND charitable = ?", "%#{search}%", false)
 	end
 
 	def charitable_gifts

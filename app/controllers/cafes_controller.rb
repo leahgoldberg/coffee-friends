@@ -10,8 +10,7 @@ class CafesController < ApplicationController
   end
 
   def show
-    @cafe = Cafe.find_by(slug: params[:id])
-    @cafe = current_cafe unless @cafe
+    @cafe = current_cafe || Cafe.find_by(slug: params[:id])
     @menu_item = MenuItem.new
     @menu_items = @cafe.menu_items
     @charitable_gifts = @cafe.unredeemed_charitable_gifts
@@ -31,7 +30,7 @@ class CafesController < ApplicationController
     if params[:cafe]
       @cafe.update_attributes(params[:cafe])
     else
-      flash[:error] = ["Something Went Wrong! Your Picture Was Not Uploaded"]
+      flash[:error] = ["Something went wrong! Your picture was not uploaded"]
     end
     render :show
   end
