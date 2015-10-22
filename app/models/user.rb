@@ -25,11 +25,11 @@ class User < ActiveRecord::Base
 	end
 
 	def unredeemed_coffee_gifts
-		self.received_coffees.where('redeemed = ?', false)
+		received_coffees.where(redeemed: false)
 	end
 
 	def redeemed_coffee_gifts
-		self.received_coffees.where('redeemed = ?', true)
+		received_coffees.where(redeemed: true)
 	end
 
 	def find_associated_coffees
