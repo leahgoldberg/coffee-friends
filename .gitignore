@@ -15,9 +15,13 @@
 /log/*.log
 /tmp
 
+# Ignore generated coverage files
 coverage
 
+# Ignore changes to Gemfile
 Gemfile.lock
+
+# Ignore changes to file config
 .DS_Store
 
 # Ignore application configuration
