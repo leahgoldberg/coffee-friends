@@ -7,7 +7,7 @@ class Cafe < ActiveRecord::Base
 	validates :email, :name, length: {maximum: 50}
 	validates :address, length: {maximum: 150}
 	validates_email_format_of :email, message: "is not in the correct format"
-  validates_uniqueness_of :email
+  	validates_uniqueness_of :email
 	validates :password, :presence => true, :length => {minimum: 6}, :on => :create
 
 	before_save :generate_slug
@@ -37,7 +37,7 @@ class Cafe < ActiveRecord::Base
 	end
 
 	def search_non_charitable_gifts(search)
-  	unredeemed_coffee_gifts.where("redemption_code LIKE ? AND charitable = ?", "%#{search}%", false)
+  		unredeemed_coffee_gifts.where("redemption_code LIKE ? AND charitable = ?", "%#{search}%", false)
 	end
 
 	def charitable_gifts
@@ -49,8 +49,8 @@ class Cafe < ActiveRecord::Base
 	end
 
 	def to_param
-    slug
-  end
+		slug
+	end
 
 	private
 
