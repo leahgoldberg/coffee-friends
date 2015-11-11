@@ -11,7 +11,6 @@ class MenuItemsController < ApplicationController
   end
 
   def update
-    # @menu_item = MenuItem.find_by(id: params[:id])
     @menu_item.attributes = menu_item_params
     flash[:error] = @menu_item.errors.full_messages unless @menu_item.save
     redirect_to cafes_profile_path
