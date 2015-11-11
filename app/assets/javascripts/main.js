@@ -22,6 +22,10 @@ $(document).ready(function() {
     initGiftFormDropdown();
   }
 
+  if ($('#friend-dropdown').length) {
+    initFriendDropdown();
+  }
+
 });
 
 
