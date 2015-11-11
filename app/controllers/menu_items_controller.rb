@@ -1,5 +1,6 @@
 class MenuItemsController < ApplicationController
-  before_action :find_menu_item, :authenticate_cafe
+  before_action :find_menu_item
+  before_action :authenticate_cafe
   before_action :authorize_cafe, except: [:create]
 
   def create
@@ -10,8 +11,9 @@ class MenuItemsController < ApplicationController
   end
 
   def update
-    @cafe = @menu_item.cafe
-    @menu_item.update_attributes(menu_item_params)
+    # @menu_item = MenuItem.find_by(id: params[:id])
+    @menu_item.attributes = menu_item_params
+    flash[:error] = @menu_item.errors.full_messages unless @menu_item.save
     redirect_to cafes_profile_path
   end
 
@@ -28,7 +30,7 @@ class MenuItemsController < ApplicationController
   end
 
   def find_menu_item
-    @menu_item = MenuItem.find_by_slug(params[:id])
+    @menu_item = MenuItem.find_by(id: params[:id]) 
   end
 
   def authenticate_cafe
