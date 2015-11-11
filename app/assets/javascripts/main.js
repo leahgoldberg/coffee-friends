@@ -22,7 +22,7 @@ $(document).ready(function() {
     initGiftFormDropdown();
   }
 
-  if ($('#friend-dropdown').length) {
+  if ($('#friend-dropdown-form').length) {
     initFriendDropdown();
   }
 
