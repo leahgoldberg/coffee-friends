@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :transactions, only: [:new, :create]
   resources :friendships, only: [:index, :new, :create]
 
+  get '/myfriends' => 'friendships#show'
   get '/login' => 'user_sessions#new'
   post '/users/sessions' => 'user_sessions#create'
   delete '/logout' => 'user_sessions#destroy'

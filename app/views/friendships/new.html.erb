@@ -1,6 +1,9 @@
-<div id="friend-dropdown-form">
-  <%= form_for :friendship, url: friendships_path do |f| %>
-  <%= f.collection_select(:friend, @friends, :id, :full_name, include_blank: true, label:false)  %>
-  <%= f.submit "Add friend" %>
-  <% end %>
-</div>  
+<div class="content">
+  <div id="friend-search-form">
+    <%= form_tag(friendships_path, method: :get, id: "friend-search") do %>
+    <%= text_field_tag(:search_term, params[:search_term], placeholder: "Search for friends") %>
+    <% end %>
+  </div>  
+  <div id="friend-search-results">
+  </div>  
+</div>
