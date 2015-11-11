@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :edit, :update]
   resources :coffee_gifts, only: [:show, :update]
   resources :transactions, only: [:new, :create]
+  resources :friendships, only: [:index, :new, :create]
 
   get '/login' => 'user_sessions#new'
   post '/users/sessions' => 'user_sessions#create'
