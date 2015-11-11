@@ -35,6 +35,24 @@
         </li>
     </ul>
 
+    <div>
+      <% if flash[:error] %>
+      <% flash[:error].each do |error| %>
+        <%= error %>
+        <% end %>
+      <% end %>
+      <ul>
+      <% @menu_items.each do |item| %>
+        <li><%=item.name%></li>
+        <%= form_for item, url: menu_item_path(item) do |f| %>
+          <%= f.text_field :price, value: item.price %>
+          <%= hidden_field_tag("_method", "put") %>
+          <%= f.submit "Edit price" %>
+        <% end %>
+      <% end %>
+      </ul>
+    </div>  
+
     </div>
   </div>
 
