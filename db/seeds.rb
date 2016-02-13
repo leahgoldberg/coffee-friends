@@ -45,9 +45,9 @@ neighborhood: "East Village", picture: Cloudinary::Uploader.upload("http://manse
 Cafe.create(name: "Kaffe 1668", address: "275 Greenwich
 St, New York, NY 10007", email: "cafe3@example.com", password: 'password', borough:"Manhattan", neighborhood: "Tribeca", picture: Cloudinary::Uploader.upload("http://acdn.architizer.com/mediadata/projects/432009/38d3ff4f.jpg")["public_id"])
 
-Cafe.create(name: "La Colombe Torrefaction", address:
-"319 Church St, New York, NY 10013", email: "cafe9@example.com", borough:"Manhattan",password:
-'password', neighborhood: "Tribeca", picture: Cloudinary::Uploader.upload("http://www.jinhwafication.com/.a/6a0147e017d0c6970b0147e0d21078970b-pi")["public_id"])
+# Cafe.create(name: "La Colombe Torrefaction", address:
+# "319 Church St, New York, NY 10013", email: "cafe9@example.com", borough:"Manhattan",password:
+# 'password', neighborhood: "Tribeca", picture: Cloudinary::Uploader.upload("http://www.jinhwafication.com/.a/6a0147e017d0c6970b0147e0d21078970b-pi")["public_id"])
 
 Cafe.create(name: "Abraço Espresso", address: "86 E
 7th St, New York, NY 10003", email: "cafe11@example.com", borough:"Manhattan",password:
