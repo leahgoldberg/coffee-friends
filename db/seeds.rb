@@ -132,12 +132,3 @@ email:"kelly.m.ripple@gmail.com", phone:"4438122021", picture: Cloudinary::Uploa
 jerry = User.create(first_name:"Jerry", last_name:"Chai", password:"password", email:"jchai@gmail.com", phone:"5104544544")
 
 kelly.given_coffees.create(menu_item: MenuItem.find(1), receiver: jerry)
-
-
-
-
-
-
-
-
-
