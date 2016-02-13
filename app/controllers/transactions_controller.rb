@@ -11,7 +11,7 @@ class TransactionsController < ApplicationController
     if TransactionHandler.send_payment!(session, params).success?
       flash[:notice] = "Success!"
       @coffee_gift = CoffeeGift.find_by(id: session[:tmp_id])
-      flash[:twilio_error] = TwilioTextSender.send!(@coffee_gift)
+      flash[:twilio_error] = TwilioTextSender.new(@coffee_gift).send!
       redirect_to confirmation_path(@coffee_gift)
     else
       flash[:alert] = "Something went wrong while processing your transaction. Please try again!"
@@ -36,5 +36,3 @@ class TransactionsController < ApplicationController
   end
 
 end
-
-
