@@ -1,6 +1,6 @@
 class CoffeeGiftsController < ApplicationController
 
-	before_action :authenticate_user, except: [:update, :filter, :confirm_redemption]
+	before_action :authenticate_user, except: [:update, :filter, :confirm_redemption, :show, :redemption_confirmation]
 	before_action :find_coffee_gift, only: [:update, :confirm, :show, :redemption_confirmation, :confirm_redemption]
 	before_action :find_cafe, except: [:new, :create, :update, :redemption_confirmation, :confirm_redemption]
 
