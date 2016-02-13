@@ -14,7 +14,11 @@
       <ul class="pricing-table add_margin">
         <li class="price"> Yay! You received a <span class="bold"><%=@coffee_gift.name%></span> from <span class="bold"><%=@coffee_gift.giver.first_name%> <%=@coffee_gift.giver.last_name%></span></li>
         <li class="price">Bring this to your barista to redeem:</li>
-        <li class="price"><kbd><%=@coffee_gift.redemption_code%></kbd></li>
+        <li class="locality">
+          <%= form_for @coffee_gift, :url => "/redeem/#{@coffee_gift.redemption_code}" do |f| %>
+          <%= hidden_field_tag "_method", "put" %>
+          <%= f.submit "redeem" %>
+          <% end%></li>
         <li class="price"> You can pick it up at <span class="bold"><%=@cafe.name%></span>
           <hr>
             <div style="height:350px;width:100%" id="map"></div>

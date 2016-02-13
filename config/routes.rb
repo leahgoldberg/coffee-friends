@@ -24,8 +24,9 @@ Rails.application.routes.draw do
   get '/register' => 'users#new'
   get '/confirmation/:id' => 'coffee_gifts#confirm', as: "confirmation"
 
-  get '/redeem/:redemption_code'
-  get '/redemption_confirmation/:id' => 'coffee_gifts#confirm_redemption', as: "redemption_confirmation"
+  get '/redeem/:redemption_code' => 'coffee_gifts#show',  as: "redeem"
+  put '/redeem/:redemption_code' => 'coffee_gifts#update'
+  get '/redemption_confirmation/:redemption_code' => 'coffee_gifts#confirm_redemption', as: "redemption_confirmation"
 
   post '/cafes/sessions' => 'cafe_sessions#create'
   delete '/cafes/logout' => 'cafe_sessions#destroy'

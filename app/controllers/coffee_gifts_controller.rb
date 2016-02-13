@@ -1,9 +1,8 @@
 class CoffeeGiftsController < ApplicationController
 
 	before_action :authenticate_user, except: [:update, :filter, :confirm_redemption]
-	before_action :find_coffee_gift, except: [:new, :create, :filter]
-	before_action :authorize_user, only: [:show]
-	before_action :find_cafe, except: [:new, :create, :update]
+	before_action :find_coffee_gift, only: [:update, :confirm, :show, :redemption_confirmation, :confirm_redemption]
+	before_action :find_cafe, except: [:new, :create, :update, :redemption_confirmation, :confirm_redemption]
 
 	def new
 		if request.xhr?
@@ -36,7 +35,7 @@ class CoffeeGiftsController < ApplicationController
 	def update
 		if @coffee_gift.update_attributes(redeemed: true)
 			flash[:notice] = "Coffee Redeemed!"
-			TwilioTextSender.send!(@coffee_gift)
+			TwilioTextSender.new(@coffee_gift).send!
 			redirect_to redemption_confirmation_path
 		else
 			flash[:error] = ["Unable to redeem voucher"]
@@ -59,7 +58,11 @@ class CoffeeGiftsController < ApplicationController
 	private
 
 	def find_coffee_gift
-		@coffee_gift = CoffeeGift.find_by(id: params[:id].split("-").first)
+		if params[:id]
+			@coffee_gift = CoffeeGift.find_by(id: params[:id].split("-").first)
+		else	
+			@coffee_gift = CoffeeGift.find_by(redemption_code: params[:redemption_code])
+		end	
 	end
 
 	def find_cafe
@@ -79,7 +82,7 @@ class CoffeeGiftsController < ApplicationController
 	end
 
 	def coffee_gift_params
-		params.require(:coffee_gift).permit(:message, :phone, :charitable)
+		params.require(:coffee_gift).permit(:message, :phone, :charitable, :redeemed)
 	end
 
 end
