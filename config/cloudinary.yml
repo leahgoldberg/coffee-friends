@@ -1,19 +1,19 @@
 ---
 development:
-  cloud_name: jchai002
-  api_key: '652865661562971'
-  api_secret: TXqRDFFRXSkUyxme8X9pa8km--E
+  cloud_name: coffeefriends
+  api_key: '153533674293246'
+  api_secret: WU2iXwh2bU5oxjmz-PHW65pCvGs 
   enhance_image_tag: true
   static_image_support: false
 production:
-  cloud_name: jchai002
-  api_key: '652865661562971'
-  api_secret: TXqRDFFRXSkUyxme8X9pa8km--E
+  cloud_name: coffeefriends
+  api_key: '153533674293246'
+  api_secret: WU2iXwh2bU5oxjmz
   enhance_image_tag: true
   static_image_support: true
 test:
-  cloud_name: jchai002
-  api_key: '652865661562971'
-  api_secret: TXqRDFFRXSkUyxme8X9pa8km--E
+  cloud_name: coffeefriends
+  api_key: '153533674293246'
+  api_secret: WU2iXwh2bU5oxjmz
   enhance_image_tag: true
   static_image_support: false

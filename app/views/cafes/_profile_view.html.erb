@@ -2,25 +2,6 @@
 <div id="cafe_profile" class="row">
   <div class="small-12 medium-9 medium-centered columns">
     <ul class="accordion" data-accordion>
-  <li class="accordion-navigation">
-    <a href="#charitable">Charitable Gifts (<%=@charitable_gifts.count%>)</a>
-      <% unless @charitable_gifts.count == 0 %>
-        <div id="charitable" class="content">
-          <div class="add_content_padding">
-          <% @charitable_gifts.each do |gift| %>
-            <ul class="vcard">
-              <li class="fn"><%= gift.name %> </li>
-              <br>
-              <li class="locality"><%= form_for gift do |f| %>
-              <%= f.submit "redeem" %>
-              <% end%></li>
-            </ul>
-            <%end%>
-          </div>
-        </div>
-      <%end%>
-    </li>
-
     <li class="accordion-navigation">
     <a href="#search-wrapper">Unredeemed Gifts (<%=@unredeemed_coffee_gifts.count%>)</a>
         <div id="search-wrapper" class="content">
@@ -30,7 +11,7 @@
             <% end %>
             <br>
             <div id= "search-results"></div>
-          </div>
+          </div>  
         </div>
         </li>
     </ul>
