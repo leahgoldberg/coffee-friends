@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
 		self == coffee_gift.receiver
 	end
 
+	def sent_coffee?(coffee_gift)
+		self == coffee_gift.giver
+	end	
+
 	def sent_or_received_coffee?(coffee_gift)
 		self == coffee_gift.giver || self == coffee_gift.receiver
 	end

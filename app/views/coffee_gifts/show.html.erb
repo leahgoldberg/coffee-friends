@@ -1,4 +1,20 @@
-<% if current_user.received_coffee?(@coffee_gift) %>
+<% if current_user && current_user.sent_coffee?(@coffee_gift) %>
+    
+    <div class="row low_content">
+      <div class="small-12 columns">
+      <ul class="pricing-table add_margin">
+        <li class="price"> You sent a <span class="bold"><%=@coffee_gift.name%></span> to <span class="bold">
+          <% if @coffee_gift.receiver %>
+            <%=@coffee_gift.receiver.first_name%> <%=@coffee_gift.receiver.last_name%>
+          <% else %>
+            <%=@coffee_gift.phone%>
+          <% end %>
+          </span> on <span class="bold"><%=@coffee_gift.created_at.strftime("%B %d, %Y")%></span></li>
+      </ul>
+    </div>
+  </div>
+
+<% else %>
 
   <% if @coffee_gift.redeemed %>
   <div class="row low_content">
@@ -29,21 +45,5 @@
     </div>
   </div>
   <% end %>
-
-<% else %>
-
-  <div class="row low_content">
-      <div class="small-12 columns">
-      <ul class="pricing-table add_margin">
-        <li class="price"> You sent a <span class="bold"><%=@coffee_gift.name%></span> to <span class="bold">
-          <% if @coffee_gift.receiver %>
-            <%=@coffee_gift.receiver.first_name%> <%=@coffee_gift.receiver.last_name%>
-          <% else %>
-            <%=@coffee_gift.phone%>
-          <% end %>
-          </span> on <span class="bold"><%=@coffee_gift.created_at.strftime("%B %d, %Y")%></span></li>
-      </ul>
-    </div>
-  </div>
 
 <% end %>
