@@ -4,6 +4,7 @@ class TwilioTextSender
 		@coffee_gift = coffee_gift
 		@account_sid = ENV["twilio_account_sid"]
 		@auth_token = ENV["twilio_auth_token"]
+		@URL = ENV["URL"]
 	end
 
 	def send!
@@ -37,9 +38,9 @@ class TwilioTextSender
 
 		def receive_message
 			if @coffee_gift.message.length > 1
-				"You received a coffee at #{@coffee_gift.cafe.name} from #{@coffee_gift.giver.first_name} with the message: \"#{@coffee_gift.message}\" Visit http://coffeefriends.herokuapp.com/redeem/#{@coffee_gift.redemption_code} to redeem."
+				"You received a coffee at #{@coffee_gift.cafe.name} from #{@coffee_gift.giver.first_name} with the message: \"#{@coffee_gift.message}\" Visit http://#{@URL}/redeem/#{@coffee_gift.redemption_code} to redeem."
 			else
-				"You received a coffee at #{@coffee_gift.cafe.name} from #{@coffee_gift.giver.first_name}! Visit http://coffeefriends.herokuapp.com/redeem/#{@coffee_gift.redemption_code} to redeem."
+				"You received a coffee at #{@coffee_gift.cafe.name} from #{@coffee_gift.giver.first_name}! Visit http://#{@URL}/redeem/#{@coffee_gift.redemption_code} to redeem."
 			end
 		end
 
