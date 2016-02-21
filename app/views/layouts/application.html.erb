@@ -7,7 +7,9 @@
   <title><%= content_for?(:title) ? yield(:title) : "coffee friends" %></title>
 
   <%= include_gon %>
-  <%= stylesheet_link_tag    'application' %>
+  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag "https://cdn.datatables.net/1.10.11/css/dataTables.foundation.min.css" %>
+
   <%= javascript_include_tag "vendor/modernizr" %>
   <%= javascript_include_tag "application"  %>
   <%= favicon_link_tag("coffee_logo.png") %>
@@ -15,6 +17,9 @@
   <link href='https://fonts.googleapis.com/css?family=Pacifico|Quicksand:400,300,700|Nunito:400,300,700' rel='stylesheet' type='text/css'>
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=false" %>
   <%= javascript_include_tag "https://js.braintreegateway.com/v2/braintree.js" %>
+  <%= javascript_include_tag "https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js" %>
+  <%= javascript_include_tag "https://cdn.datatables.net/1.10.11/js/dataTables.foundation.min.js" %>
+
 </head>
 
 <body>

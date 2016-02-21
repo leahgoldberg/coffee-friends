@@ -122,10 +122,6 @@ User.all.each do |u|
   end
 end
 
-10.times do
-  CoffeeGift.create(giver: User.all.sample, menu_item: MenuItem.first, redeemed: false, charitable: true)
-end
-
 kelly = User.create(first_name:"Kelly",last_name:"Ripple", password: "password",
 email:"kelly.m.ripple@gmail.com", phone:"4438122021", picture: Cloudinary::Uploader.upload("https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/2/005/079/3bf/091d5ee.jpg")["public_id"])
 

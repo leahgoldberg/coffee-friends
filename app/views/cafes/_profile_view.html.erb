@@ -1,22 +1,24 @@
 <hr>
 <div id="cafe_profile" class="row">
   <div class="small-12 medium-9 medium-centered columns">
-    <ul class="accordion" data-accordion>
-    <li class="accordion-navigation">
-    <a href="#search-wrapper">Unredeemed Gifts (<%=@unredeemed_coffee_gifts.count%>)</a>
-        <div id="search-wrapper" class="content">
-          <div class="add_content_padding">
-           <%= form_tag(@cafe, :method => "get", id: "search-form") do %>
-            <%= text_field_tag :search, params[:search], placeholder: "Search Redemption Codes" %>
-            <% end %>
-            <br>
-            <div id= "search-results"></div>
-          </div>  
-        </div>
-        </li>
-    </ul>
 
-    </div>
-  </div>
+    <table id="cafe_gifts_table">
+      <thead>
+        <th class="date-row">Date</th>
+        <th>Sender</th>
+        <th>Receiver</th>
+        <th>Confirmation Code</th>
+        <th>Gross</th>
+        <th>Net</th>
+        <th>Redeeemed?</th>
+        <th>Payment Status</th>
+      </thead>
+      <tbody>
+        <%= render partial: 'cafes/coffee_gift', collection: @coffee_gifts, as: :gift %> 
+      </tbody>  
+    </table>    
+
+ </div>
+</div>
 
 <input type="hidden" value="<%=@cafe.id%>" id="cafe_id">

@@ -13,7 +13,7 @@ class CafesController < ApplicationController
     @cafe = current_cafe || Cafe.find_by(slug: params[:id])
     @menu_item = MenuItem.new
     @menu_items = @cafe.menu_items
-    @charitable_gifts = @cafe.unredeemed_charitable_gifts
+    @coffee_gifts = @cafe.coffee_gifts.includes(:giver, :receiver)
     @unredeemed_coffee_gifts = @cafe.unredeemed_coffee_gifts
     if request.xhr?
       if params[:search] == ""

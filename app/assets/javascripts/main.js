@@ -22,6 +22,10 @@ $(document).ready(function() {
     initGiftFormDropdown();
   }
 
+  if ($('#cafe_gifts_table').length) {
+    $('#cafe_gifts_table').DataTable();
+  }
+
 });
 
 
