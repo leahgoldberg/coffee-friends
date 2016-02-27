@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 	validates_format_of :phone, with: /\d{10}/, message: "is not in the correct format"
 	validates :password, :presence => true, :length => {minimum: 6}, :on => :create
 
-	before_save :extract_username, :downcase_names
+	before_save :extract_username, :downcase_user_info
 
 	def received_coffee?(coffee_gift)
 		self == coffee_gift.receiver
@@ -55,9 +55,10 @@ class User < ActiveRecord::Base
 		self.username = self.email.split('@').first.downcase
 	end
 
-	def downcase_names
+	def downcase_user_info
 		self.first_name = self.first_name.downcase
 		self.last_name = self.last_name.downcase
+		self.email = self.email.downcase
 	end
 
 end
