@@ -5,9 +5,16 @@ class UserSessionsController < ApplicationController
 
   def create
     if Cafe.find_by(email: user_session_params[:email])
-      flash[:login_error] = "You a cafe, bro."
-      puts "you suck"
-      redirect_to root_url
+      @cafe = Cafe.find_by(email: user_session_params[:email])
+      if @cafe && @cafe.authenticate(user_session_params[:password])
+        log_in_cafe(@cafe)
+        redirect_to cafes_profile_path
+      else
+        flash[:cafe_error] = "Incorrect email or password"
+        redirect_to root_path
+      end      
+
+
     else
       user = User.find_by(email: user_session_params[:email])
       if user && user.authenticate(user_session_params[:password])
