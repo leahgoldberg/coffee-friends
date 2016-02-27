@@ -34,6 +34,7 @@ $(document).ready(function() {
           typeof i === 'number' ?
           i : 0;
         };
+
         total = api
         .column( 4 )
         .data()
@@ -41,17 +42,25 @@ $(document).ready(function() {
           return intVal(a) + intVal(b);
         }, 0 );
 
-        pageTotal = api
+        pageGrossTotal = api
         .column( 4, { page: 'current'} )
         .data()
         .reduce( function (a, b) {
           return intVal(a) + intVal(b);
         }, 0 );
-
+        pageNetTotal = api
+        .column( 5, { page: 'current'} )
+        .data()
+        .reduce( function (a, b) {
+          return intVal(a) + intVal(b);
+        }, 0 );
 
         $(api.column(4).footer() ).html(
-          '$' + Number(pageTotal).toFixed(2)
-          );
+          '$' + Number(pageGrossTotal).toFixed(2)
+        );
+        $(api.column(5).footer() ).html(
+          '$' + Number(pageNetTotal).toFixed(2)
+        );
       }
     });
   }
