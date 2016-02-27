@@ -13,12 +13,19 @@
         <th>Redeeemed?</th>
         <th>Payment Status</th>
       </thead>
+      <tfoot>
+        <tr>
+          <th colspan="4" style="text-align:right">Page Total:</th>
+          <th></th>
+        </tr>
+      </tfoot>
+
       <tbody>
         <%= render partial: 'cafes/coffee_gift', collection: @coffee_gifts, as: :gift %> 
       </tbody>  
     </table>    
 
- </div>
+  </div>
 </div>
 
 <input type="hidden" value="<%=@cafe.id%>" id="cafe_id">
