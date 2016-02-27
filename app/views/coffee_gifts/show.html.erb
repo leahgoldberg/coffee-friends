@@ -1,51 +1,60 @@
 <% if current_user && current_user.sent_coffee?(@coffee_gift) %>
-    
-    <div class="row low_content">
-      <div class="small-12 columns">
-      <ul class="pricing-table add_margin">
-        <li class="price"> You sent a <span class="bold"><%=@coffee_gift.name%></span> to <span class="bold">
-          <% if @coffee_gift.receiver %>
-            <%=@coffee_gift.receiver.first_name%> <%=@coffee_gift.receiver.last_name%>
-          <% else %>
-            <%=@coffee_gift.phone%>
-          <% end %>
-          </span> on <span class="bold"><%=@coffee_gift.created_at.strftime("%B %d, %Y")%></span></li>
-      </ul>
-    </div>
+
+<div class="row low_content">
+  <div class="small-12 columns">
+    <ul class="pricing-table add_margin">
+      <li class="price"> You sent a <span class="bold"><%=@coffee_gift.name%></span> to <span class="bold">
+        <% if @coffee_gift.receiver %>
+        <%=@coffee_gift.receiver.first_name%> <%=@coffee_gift.receiver.last_name%>
+        <% else %>
+        <%=@coffee_gift.phone%>
+        <% end %>
+      </span> on <span class="bold"><%=@coffee_gift.created_at.strftime("%B %d, %Y")%></span></li>
+    </ul>
   </div>
+</div>
 
 <% else %>
 
-  <% if @coffee_gift.redeemed %>
-  <div class="row low_content">
-      <div class="small-12 columns">
-        <ul class="pricing-table add_margin">
-          <li class="price"> This gift has been redeemed!</li>
-        </ul>
-      </div>
+<% if @coffee_gift.redeemed %>
+<div class="row low_content">
+  <div class="small-12 columns">
+    <ul class="pricing-table add_margin">
+      <li class="price"> This gift has been redeemed!</li>
+    </ul>
   </div>
-  <% else %>
-  <div class="row low_content">
-      <div class="small-12 columns ">
-      <ul class="pricing-table add_margin">
-        <li class="price"> Yay! You received a <span class="bold"><%=@coffee_gift.name%></span> from <span class="bold"><%=@coffee_gift.giver.first_name%> <%=@coffee_gift.giver.last_name%></span></li>
-        <li class="price">Bring this to your barista to redeem:</li>
-        <center>
+</div>
+<% else %>
+<div class="row low_content">
+  <div class="small-12 columns ">
+    <ul class="pricing-table add_margin">
+      <li class="price"><span><%=@coffee_gift.giver.first_name.capitalize%> gifted you a <%=@coffee_gift.name.downcase%>!  You can pick it up at <%=@cafe.name%>.</li>
+      <li class="price">Bring this to your barista to redeem:</li>
+      <br>
+      <center>
         <li class="locality">
-          <%= form_for @coffee_gift, :url => "/redeem/#{@coffee_gift.redemption_code}" do |f| %>
-          <%= hidden_field_tag "_method", "put" %>
-          <%= f.submit "redeem" %>
-          <% end%></li>
-        </center>
-        <li class="price"> You can pick it up at <span class="bold"><%=@cafe.name%></span>
-          <hr>
-            <div style="height:350px;width:100%" id="map"></div>
-                  <input id="address" type="hidden" value="<%=@cafe.address%>">
+          <div id="redeem_button">
+
+
+            <li><%=link_to "REDEEM", "#redeem-confirm-modal", id: "register-modal-trigger", rel:"leanModal", class: "small button" %></li>
+
+
+            
+          </div>
         </li>
-        <li class="bullet-item"><%=@cafe.address %></li>
-      </ul>
-    </div>
+      </center>
+      <li class="price">
+        <hr>
+        <div style="height:350px;width:100%" id="map"></div>
+        <input id="address" type="hidden" value="<%=@cafe.address%>">
+      </li>
+      <li class="bullet-item"><%=@cafe.address %></li>
+    </ul>
   </div>
-  <% end %>
+</div>
+<% end %>
 
 <% end %>
+
+ <%= render partial: "coffee_gifts/redeem_modal" %>
+
