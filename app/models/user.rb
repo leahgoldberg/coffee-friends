@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
 	def sent_coffee?(coffee_gift)
 		self == coffee_gift.giver
-	end	
+	end
 
 	def sent_or_received_coffee?(coffee_gift)
 		self == coffee_gift.giver || self == coffee_gift.receiver
@@ -48,6 +48,16 @@ class User < ActiveRecord::Base
 	def combined_value
     "#{self.full_name} (#{self.username})"
   end
+
+	def create_from_omniauth(auth)
+		where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.info.name
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+    end
+	end
 
 	private
 

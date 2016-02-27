@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 20160221163837) do
     t.string   "slug"
   end
 
+  create_table "friendships", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "menu_items", force: true do |t|
     t.integer  "cafe_id"
     t.string   "name",       limit: 30, null: false
