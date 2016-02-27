@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   root 'cafes#index'
 
   get '/fb-login' => 'fb_sessions#new'
-  post '/users/fb-sessions' => 'fb_sessions#create'
-  delete '/fb-logout' => 'fb_sessions#delete' 
+  get '/auth/:provider/callback' => 'fb_sessions#create'
+  delete '/fb-logout' => 'fb_sessions#delete'
 
   get '/cafes/login' => 'cafe_sessions#new'
   get '/cafes/profile' => 'cafes#show'

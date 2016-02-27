@@ -6,13 +6,9 @@ class FbSessionsController < ApplicationController
   end
 
   def create
-    user = user.create_from_omniauth(auth_hash)
-    if user.save
-      log_in_user
-      redirect_to root_path
-    else
-      render 'user_sessions/fb_login'
-    end
+    user = User.create_from_omniauth(auth_hash)
+    log_in_user(user)
+    render partial: 'user_sessions/fb_mid_login', locals: {user:user}, layout: false
   end
 
   def destroy

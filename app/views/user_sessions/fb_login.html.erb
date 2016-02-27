@@ -4,7 +4,10 @@
 
 <div id='fb-root'>
 
-  <fb:login-button show-faces="false" width="200" max-rows="1"></fb:login-button>
+  <%= link_to 'Sign in with Facebook', '#', id: 'login-button' %>
+  <!-- <fb:login-button onlogin="fbLogin();"></fb:login-button> -->
+  <p id='fb-connect'></p>
+
   <p id='results'></p>
 
 </div>

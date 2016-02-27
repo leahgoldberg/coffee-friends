@@ -56,6 +56,3 @@ class CafesController < ApplicationController
   end
 
 end
-
-
-
