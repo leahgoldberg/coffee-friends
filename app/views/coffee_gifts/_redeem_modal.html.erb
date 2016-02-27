@@ -1,0 +1,21 @@
+<div id="redeem-confirm-modal" class="popupContainer">
+
+  <div id="redeem-modal">
+    <center>
+      <header class="popupHeader">
+        <h3 class="header_title">get that coffee</h3>
+        <div class="modal_close"><%= image_tag("grey-close.png") %></div>    </header>
+
+
+        <section class="popupBody">
+          Ask your barista to press redeem!  Once you press redeem, your coffee can not be recovered!
+          <%= form_for @coffee_gift, :url => "/redeem/#{@coffee_gift.redemption_code}" do |f| %>
+          <%= hidden_field_tag "_method", "put" %>
+          <%= f.submit "REDEEM" %>                 
+          <%end%>
+        </center>
+      </section>
+    </div>
+
+
+  </div>
