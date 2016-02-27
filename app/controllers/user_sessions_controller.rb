@@ -4,13 +4,19 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: user_session_params[:email])
-    if user && user.authenticate(user_session_params[:password])
-      log_in_user(user)
+    if Cafe.find_by(email: user_session_params[:email])
+      flash[:login_error] = "You a cafe, bro."
+      puts "you suck"
+      redirect_to root_url
     else
-      flash[:login_error] = "Incorrect email or password"
+      user = User.find_by(email: user_session_params[:email])
+      if user && user.authenticate(user_session_params[:password])
+        log_in_user(user)
+      else
+        flash[:login_error] = "Incorrect email or password"
+      end
+      redirect_to root_url
     end
-    redirect_to root_url
   end
 
   def destroy
