@@ -30,6 +30,6 @@ $(function() {
           $('#results').html(json);
         });
       }
-    }, { scope: 'email'});
+    }, { scope: 'email,user_friends'});
   });
 });

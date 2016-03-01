@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 	# validates_format_of :phone, with: /\d{10}/, message: "is not in the correct format"
 	# validates :password, :presence => true, :length => {minimum: 6}, :on => :create
 
-	after_save :extract_username
+	before_save :extract_username, :set_names_based_on_provider
 
 	def received_coffee?(coffee_gift)
 		self == coffee_gift.receiver
@@ -58,7 +58,6 @@ class User < ActiveRecord::Base
       user.full_name = auth.info.name
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-			user.save!
     end
 	end
 
@@ -68,9 +67,18 @@ class User < ActiveRecord::Base
 		self.username = self.email.split('@').first.downcase
 	end
 
-	# def downcase_names
-	# 	self.first_name = self.first_name.downcase
-	# 	self.last_name = self.last_name.downcase
-	# end
+	def set_names_based_on_provider
+		self.provider == 'facebook' ? set_first_last_names : set_full_name
+	end
+
+	def set_first_last_names
+		name_arr = self.full_name.split(' ')
+		self.last_name = name_arr.pop
+		self.first_name = name_arr.join(' ')
+	end
+
+	def set_full_name
+		self.full_name = self.first_name + self.last_name
+	end
 
 end
