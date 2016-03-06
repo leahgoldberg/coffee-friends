@@ -24,7 +24,7 @@ skip_before_action :verify_authenticity_token, only: :create
       charge = Stripe::Charge.create(
         :amount => (@coffee_gift.price*100).to_i, # amount in cents, again
         :currency => "usd",
-        :source => token,
+        :source => token, 
         :description => "COFFEEPAL.LLC"
         )
     rescue Stripe::CardError => e
