@@ -22,4 +22,8 @@ $(document).ready(function() {
     initGiftFormDropdown();
   }
 
+  if ($('.transaction-container').length) {
+    initStripe();
+  }
+
 });

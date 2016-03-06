@@ -1,22 +1,63 @@
+
+<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.8.1/jquery.validate.min.js"></script>
+
 <div class="row low_content">
   <div class="form-container radius-box glassy-bg small-10 small-centered medium-8 large-6 columns">
 
     <% if flash[:alert] %>
       <p class="alert"><%=flash[:alert]%></p>
     <% end %>
-    <h1 class="mbs add_title_padding ">New Transaction</h1>
-    <%= form_tag transactions_path do%>
-      <p>Please enter your payment details:</p>
-
+    <form method="post" action="/transactions">
       <div class="add-border">
       <div class="transaction-container">
-        <div id="dropin"></div>
-      </div>
-      </div>
 
+        <h1>Checkout</h1>
+    
+        <form action="/" method="post" id="example-form" style="display: none;">
+            
+            <div class="form-row">
+                <label>Card Number</label>
+                <input type="text" maxlength="20" autocomplete="on" class="card-number stripe-sensitive required" />
+            </div>
+            
+            <div class="form-row">
+                <label>CVC</label>
+                <input type="text" maxlength="4" autocomplete="off" class="card-cvc stripe-sensitive required" />
+            </div>
+            
+            <div class="form-row">
+                <label>Expiration</label>
+                <div class="expiry-wrapper">
+                    <select class="card-expiry-month stripe-sensitive required">
+                    </select>
+                    <script type="text/javascript">
+                        var select = $(".card-expiry-month"),
+                            month = new Date().getMonth() + 1;
+                        for (var i = 1; i <= 12; i++) {
+                            select.append($("<option value='"+i+"' "+(month === i ? "selected" : "")+">"+i+"</option>"))
+                        }
+                    </script>
+                    <span> / </span>
+                    <select class="card-expiry-year stripe-sensitive required"></select>
+                    <script type="text/javascript">
+                        var select = $(".card-expiry-year"),
+                            year = new Date().getFullYear();
+                        for (var i = 0; i < 12; i++) {
+                            select.append($("<option value='"+(i + year)+"' "+(i === 0 ? "selected" : "")+">"+(i + year)+"</option>"))
+                        }
+                    </script>
+                </div>
+            </div>
+
+            <button type="submit" name="submit-button" id="transaction-submit-button">Submit</button>
+            <span class="payment-errors"></span>
+        </form>
+
+      </div>
+      </div>
       <div class="spacer"></div>
-      <%=submit_tag "Pay $#{format_price(@coffee_gift.price)}", class: "button mt1" %>
-    <%end%>
+</form>
 
   </div>
 </div>

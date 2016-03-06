@@ -1,23 +1,39 @@
+
+
 class TransactionsController < ApplicationController
+skip_before_action :verify_authenticity_token, only: :create
 
   def new
     @coffee_gift = CoffeeGift.find_by(id: session[:tmp_id])
     authenticate_user
     authorize_user
-    gon.client_token = TransactionHandler.generate_client_token
   end
 
   def create
-    if TransactionHandler.send_payment!(session, params).success?
-      flash[:notice] = "Success!"
-      @coffee_gift = CoffeeGift.find_by(id: session[:tmp_id])
-      flash[:twilio_error] = TwilioTextSender.new(@coffee_gift).send!
-      redirect_to confirmation_path(@coffee_gift)
-    else
-      flash[:alert] = "Something went wrong while processing your transaction. Please try again!"
-      gon.client_token = TransactionHandler.generate_client_token
-      render :new
+    @coffee_gift = CoffeeGift.find_by(id: session[:tmp_id])
+
+    # Set your secret key: remember to change this to your live secret key in production
+    # See your keys here https://dashboard.stripe.com/account/apikeys
+    Stripe.api_key = "sk_test_0mqxelCW5qHVbdH2GYG43467"
+
+    # Get the credit card details submitted by the form
+    token = params[:stripeToken]
+
+    # Create the charge on Stripe's servers - this will charge the user's card
+    begin
+      charge = Stripe::Charge.create(
+        :amount => (@coffee_gift.price*100).to_i, # amount in cents, again
+        :currency => "usd",
+        :source => token,
+        :description => "COFFEEPAL.LLC"
+        )
+    rescue Stripe::CardError => e
+      # The card has been declined
     end
+    flash[:notice] = "Success!"
+    flash[:twilio_error] = TwilioTextSender.new(@coffee_gift).send!
+    redirect_to confirmation_path(@coffee_gift)
+
   end
 
   private
