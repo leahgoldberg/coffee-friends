@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   root 'cafes#index'
 
   get '/fb-login' => 'fb_sessions#new'
-  get '/auth/:provider/callback' => 'fb_sessions#create'
+  get '/auth/:provider/callback' => 'fb_sessions#authenticate'
+  post '/sessions' => 'fb_sessions#create'
   delete '/fb-logout' => 'fb_sessions#delete'
+
+  resources :users, only: [:create, :edit, :update]
+  resources :user_steps
 
   get '/cafes/login' => 'cafe_sessions#new'
   get '/cafes/profile' => 'cafes#show'
@@ -17,7 +21,6 @@ Rails.application.routes.draw do
   end
 
   resources :menu_items, only: [:destroy, :create, :update]
-  resources :users, only: [:create, :edit, :update]
   resources :coffee_gifts, only: [:show, :update]
   resources :transactions, only: [:new, :create]
 

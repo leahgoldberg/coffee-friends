@@ -1,3 +1,11 @@
 <%=image_tag("#{user.image_url}")%>
 <p><%=user.full_name%></p>
 <p><%=user.email%></p>
+
+<%= form_for(user, url: sessions_path, method: 'POST') do |f| %>
+  <%= f.label :phone %>
+  <%= f.text_field :phone, value: user.phone %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.submit "Register", class: "button-round" %>
+<% end %>

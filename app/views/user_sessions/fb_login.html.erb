@@ -4,6 +4,12 @@
 
 <div id='fb-root'>
 
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <p><%= error %></p>
+  <% end %>
+<% end %>
+
   <%= link_to 'Sign in with Facebook', '#', id: 'login-button' %>
   <!-- <fb:login-button onlogin="fbLogin();"></fb:login-button> -->
   <p id='fb-connect'></p>
