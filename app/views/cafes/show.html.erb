@@ -5,7 +5,7 @@
     <% if @cafe.owner?(current_cafe) %>
     <%= render partial: "profile_view" %>
     <% else %>
-     <%= cl_image_tag(@cafe.picture, :width => 1600, :height => 700, :crop => :fill) %>
+     <%= cl_image_tag(@cafe.image_url, :width => 1600, :height => 700, :crop => :fill) %>
      <hr>
     <%= render partial: "user_view" %>
     <% end %>

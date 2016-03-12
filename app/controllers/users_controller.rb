@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    gon.fb_app_id = ENV['FB_APP_ID']
   end
 
   def authenticate
