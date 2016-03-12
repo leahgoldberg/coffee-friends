@@ -43,13 +43,6 @@ ActiveRecord::Schema.define(version: 20160306190736) do
     t.string   "slug"
   end
 
-  create_table "friendships", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "menu_items", force: true do |t|
     t.integer  "cafe_id"
     t.string   "name",       limit: 30, null: false
@@ -59,12 +52,12 @@ ActiveRecord::Schema.define(version: 20160306190736) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "first_name",       null: false
-    t.string   "last_name",        null: false
-    t.string   "username",         null: false
-    t.string   "email",            null: false
-    t.string   "phone",            null: false
-    t.string   "password_digest",  null: false
+    t.string   "first_name",       limit: 25, null: false
+    t.string   "last_name",        limit: 25, null: false
+    t.string   "username",         limit: 50, null: false
+    t.string   "email",            limit: 50, null: false
+    t.string   "phone",                       null: false
+    t.string   "password_digest",             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "provider"

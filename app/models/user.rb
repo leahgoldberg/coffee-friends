@@ -43,19 +43,19 @@ class User < ActiveRecord::Base
 	end
 
 	def combined_value
-    "#{self.full_name} (#{self.username})"
-  end
+		"#{self.full_name} (#{self.username})"
+	end
 
 	def self.from_omniauth(auth)
 		where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
+			user.provider = auth.provider
+			user.uid = auth.uid
 			user.email = auth.info.email
 			user.image_url = auth.info.image
-      user.full_name = auth.info.name
-      user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-    end
+			user.full_name = auth.info.name
+			user.oauth_token = auth.credentials.token
+			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+		end
 	end
 
 	private
