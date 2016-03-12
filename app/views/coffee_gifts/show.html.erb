@@ -1,52 +1,69 @@
 <% if current_user && current_user.sent_coffee?(@coffee_gift) %>
-    
-    <div class="row low_content">
-      <div class="small-12 columns">
-      <ul class="pricing-table add_margin">
-        <li class="price"> You sent a <span class="bold"><%=@coffee_gift.name%></span> to <span class="bold">
-          <% if @coffee_gift.receiver %>
-            <%=@coffee_gift.receiver.first_name%> <%=@coffee_gift.receiver.last_name%>
-          <% else %>
-            <%=@coffee_gift.phone%>
-          <% end %>
-          </span> on <span class="bold"><%=@coffee_gift.created_at.strftime("%B %d, %Y")%></span></li>
-      </ul>
-    </div>
+
+<div class="row low_content">
+  <div class="small-12 columns">
+    <ul class="pricing-table add_margin">
+      <li class="price"> You sent a <span class="bold"><%=@coffee_gift.name%></span> to <span class="bold">
+        <% if @coffee_gift.receiver %>
+        <%=@coffee_gift.receiver.first_name%> <%=@coffee_gift.receiver.last_name%>
+        <% else %>
+        <%=@coffee_gift.phone%>
+        <% end %>
+      </span> on <span class="bold"><%=@coffee_gift.created_at.strftime("%B %d, %Y")%></span></li>
+    </ul>
   </div>
+</div>
 
 <% else %>
 
-  <% if @coffee_gift.redeemed %>
-  <div class="row low_content">
-      <div class="small-12 columns">
-        <ul class="pricing-table add_margin">
-          <li class="price"> This gift has been redeemed!</li>
-        </ul>
-      </div>
+<% if @coffee_gift.redeemed %>
+<div class="row low_content">
+  <div class="small-12 columns">
+    <ul class="pricing-table add_margin">
+      <li class="price"> This gift has been redeemed!</li>
+    </ul>
   </div>
-  <% else %>
-  <div class="row low_content">
-      <div class="small-12 columns ">
-      <ul class="pricing-table add_margin">
-        <li class="price"> <%=@coffee_gift.giver.first_name.capitalize%> <%=@coffee_gift.giver.last_name.capitalize%> sent you a <span class="bold"><%=@coffee_gift.name%>! </span></li>
-        <li class="price">Bring this to your barista at <%=@cafe.name%> to redeem:</li>
-        <center>
-        <li class="locality">
-          <%= form_for @coffee_gift, :url => "/redeem/#{@coffee_gift.redemption_code}" do |f| %>
-          <%= hidden_field_tag "_method", "put" %>
-          <br>
-          <%= f.submit "Redeem" %>
-          <% end%></li>
+</div>
+<% else %>
+<div class="row low_content">
+  <div class="small-12 columns ">
+    <ul class="pricing-table add_margin">
+      <li class="price"> <%=@coffee_gift.giver.first_name.capitalize%> <%=@coffee_gift.giver.last_name.capitalize%> sent you a <span class="bold"><%=@coffee_gift.name%>! </span></li>
+      <li class="price">Bring this to your barista at <%=@cafe.name%> to redeem:</li>
+      <center>
+          <br><br>
+          <%= link_to "Redeem", "#confirm-warn-modal", id: "redeem_button", rel:"leanModal" %>
+<br><br><br>
+          </li>
         </center>
         <li class="price">Here's the location of <span class="bold"><%=@cafe.name%></span>
           <hr>
-            <div style="height:350px;width:100%" id="map"></div>
-                  <input id="address" type="hidden" value="<%=@cafe.address%>">
+          <div style="height:350px;width:100%" id="map"></div>
+          <input id="address" type="hidden" value="<%=@cafe.address%>">
         </li>
         <li class="bullet-item"><%=@cafe.address %></li>
       </ul>
     </div>
   </div>
-  <% end %>
 
-<% end %>
+  <div id="confirm-warn-modal" class="popupContainer">
+      <header class="popupHeader">
+      <h3 class="header_title">CONFIRMATION</h3>
+      <div class="modal_close"><%= image_tag("grey-close.png") %></div>
+    </header>
+    <section class="popupBody">
+          <%= form_for @coffee_gift, :url => "/redeem/#{@coffee_gift.redemption_code}" do |f| %>
+          Ask your barista to press this button.
+          Once you hit redeem, your coffee is gone!
+          <%= hidden_field_tag "_method", "put" %>
+          <br>
+          <%= f.submit "Redeem" %>
+          <% end%>
+   </section>
+
+ </div>  
+
+
+ <% end %>
+
+ <% end %>

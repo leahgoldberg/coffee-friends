@@ -1,27 +1,17 @@
-<div id="login-modal" class="popupContainer">
+<div id="confirm-warn-modal" class="popupContainer">
 
-  <div id="user-login">
+  <div id="confirm-warn">
 
     <header class="popupHeader">
-      <h3 class="header_title">Log In</h3>
+      <h3 class="header_title">Confirmation</h3>
       <div class="modal_close"><%= image_tag("grey-close.png") %></div>
     </header>
-
-    <div id="user-login-errors" class="popupErrors">
-    <% if flash[:login_error] %>
-        <p><%= flash[:login_error] %></p>
-    <% end %>
-    </div>  
+ 
 
     <section class="popupBody">
-     <%= form_for(:user_session, url: users_sessions_path) do |f| %>
-     <%= f.text_field :email, placeholder: "Email" , label: false%>
-     <%= f.password_field :password, placeholder: "Password", label: false%>
-     <%= f.submit "Log in", class: "button tiny" %>
+     <%= f.submit "Redeem", class: "button tiny" %>
      <% end %>
    </section>
  </div>
-
- <%= render "welcome/cafe_login" %>
 
 </div>

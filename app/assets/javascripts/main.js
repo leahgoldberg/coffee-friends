@@ -26,4 +26,8 @@ $(document).ready(function() {
     initStripe();
   }
 
+  if($('#confirm-warn-modal').length){
+    initConfirmWarnModal();
+  }
+
 });
