@@ -1,25 +1,40 @@
 module UsersHelper
   def add_facebook_info_to_session(user)
-    flash[:provider] = user.provider
-    flash[:uid] = user.uid
-    flash[:email] = user.email
-    flash[:image_url] = user.image_url
-    flash[:full_name] = user.full_name
-    flash[:first_name] = user.first_name
-    flash[:oauth_token] = user.oauth_token
-    flash[:oauth_expires_at] = user.oauth_expires_at
+    session[:provider] = user.provider
+    session[:uid] = user.uid
+    session[:email] = user.email
+    session[:image_url] = user.image_url
+    session[:full_name] = user.full_name
+    session[:first_name] = user.first_name
+    session[:oauth_token] = user.oauth_token
+    session[:oauth_expires_at] = user.oauth_expires_at
   end
 
   def construct_user(params)
+    session[:provider] == 'facebook' ? construct_user_from_facebook(params) : User.new(params)
+  end
+
+  def construct_user_from_facebook(params)
     User.new(
-      provider: flash[:provider],
-      uid: flash[:uid],
-      image_url: flash[:image_url],
-      email: flash[:email],
-      full_name: flash[:full_name],
-      oauth_token: flash[:oauth_token],
-      oauth_expires_at: flash[:oauth_expires_at],
-      phone: params[:phone],
-      password: params[:password])
+    provider: session[:provider],
+    uid: session[:uid],
+    image_url: session[:image_url],
+    email: session[:email],
+    full_name: session[:full_name],
+    oauth_token: session[:oauth_token],
+    oauth_expires_at: session[:oauth_expires_at],
+    phone: params[:phone],
+    password: params[:password])
+  end
+
+  def remove_facebook_info_from_session
+    session.delete(:provider)
+    session.delete(:uid)
+    session.delete(:email)
+    session.delete(:image_url)
+    session.delete(:full_name)
+    session.delete(:first_name)
+    session.delete(:oauth_token)
+    session.delete(:oauth_expires_at)
   end
 end

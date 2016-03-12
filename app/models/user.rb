@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 	validates_length_of :phone, is: 10
 	validates_email_format_of :email, message: "is not in the correct format"
 	validates_format_of :phone, with: /\d{10}/, message: "is not in the correct format"
-	validates :password, :presence => true, :length => {minimum: 6}, :on => :create
+	validates :password, length: {minimum: 6}, :on => :create
 
 	before_save :extract_username, :set_names_based_on_provider
 
@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
 	end
 
 	def set_full_name
-		self.full_name = self.first_name + self.last_name
+		self.full_name = [self.first_name, self.last_name].join(' ')
 	end
 
 end

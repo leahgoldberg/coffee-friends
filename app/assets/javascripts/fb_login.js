@@ -4,9 +4,7 @@ window.fbAsyncInit = function() {
     status : true,
     cookie : true,
     xfbml  : true,
-    // version : 'v2.5'
   });
-  console.log("fb init")
 };
 
 (function(d) {
@@ -16,20 +14,34 @@ window.fbAsyncInit = function() {
     d.getElementsByTagName('head')[0].appendChild(js);
   }(document));
 
-// function fbLogin() {
 $(function() {
-  $('#login-button').click(function(e) {
+  $('#fb-register-button').click(function(e) {
     e.preventDefault();
-    console.log("fb login")
     FB.login(function(response) {
       if (response.authResponse) {
         $.ajax({
           url: '/auth/facebook/callback',
           type: 'GET'
         }).done(function(json) {
-          $('#results').html(json);
+          $('#register').html(json);
         });
       }
     }, { scope: 'email,user_friends'});
   });
+
+  // $('#fb-mid-login-form').submit(function(e) {
+  //   e.preventDefault();
+  //   $.ajax({
+  //     url: '/users',
+  //     type: 'POST',
+  //     data: $(this).serialize()
+  //   }).done(function(response) {
+  //     debugger
+  //     console.log('cool');
+  //   }).fail(function(response) {
+  //     debugger
+  //     console.log('wut');
+  //   })
+  // })
+
 });

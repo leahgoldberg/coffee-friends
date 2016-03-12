@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include UsersHelper
 
   before_action :authorize_user, only: [:show]
 
@@ -6,15 +7,26 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def authenticate
+    @user = User.from_omniauth(auth_hash)
+    add_facebook_info_to_session(@user)
+    render partial: 'users/fb_mid_login', locals: { user: @user }, layout: false
+  end
+
   def create
-    user = User.new(user_params.merge(picture: Cloudinary::Uploader.upload("http://cdn.patch.com/assets/contrib/images/placeholder-user-photo.png")["public_id"]))
-    if user.save
-      log_in_user(user)
-      user.find_associated_coffees
+    @user = construct_user(user_params)
+    if @user.save
+      log_in_user(@user)
+      @user.find_associated_coffees
+      remove_facebook_info_from_session
       redirect_to root_path
     else
-      flash[:reg_error]=user.errors.full_messages
-      redirect_to root_path
+      flash[:errors] = @user.errors.full_messages
+      if @user.provider=='facebook'
+        render 'users/fb_mid_login'
+      else
+        render 'new'
+      end
     end
   end
 
@@ -38,6 +50,11 @@ class UsersController < ApplicationController
     render :show
   end
 
+  protected
+
+  def auth_hash
+    env['omniauth.auth']
+  end
 
   private
 

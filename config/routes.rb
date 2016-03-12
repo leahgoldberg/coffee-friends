@@ -2,14 +2,6 @@ Rails.application.routes.draw do
 
   root 'cafes#index'
 
-  get '/fb-login' => 'fb_sessions#new'
-  get '/auth/:provider/callback' => 'fb_sessions#authenticate'
-  post '/sessions' => 'fb_sessions#create'
-  delete '/fb-logout' => 'fb_sessions#delete'
-
-  resources :users, only: [:create, :edit, :update]
-  resources :user_steps
-
   get '/cafes/login' => 'cafe_sessions#new'
   get '/cafes/profile' => 'cafes#show'
   post '/cafes/borough' => 'cafes#borough'
@@ -24,13 +16,16 @@ Rails.application.routes.draw do
   resources :coffee_gifts, only: [:show, :update]
   resources :transactions, only: [:new, :create]
 
+  resources :users, only: [:create, :edit, :update]
+  get '/register' => 'users#new'
+  get '/auth/:provider/callback' => 'users#authenticate'
+
   get '/login' => 'user_sessions#new'
   post '/users/sessions' => 'user_sessions#create'
   delete '/logout' => 'user_sessions#destroy'
   get '/profile' => 'users#show'
-  get '/register' => 'users#new'
-  get '/confirmation/:id' => 'coffee_gifts#confirm', as: "confirmation"
 
+  get '/confirmation/:id' => 'coffee_gifts#confirm', as: "confirmation"
   get '/redeem/:redemption_code' => 'coffee_gifts#show',  as: "redeem"
   put '/redeem/:redemption_code' => 'coffee_gifts#update'
   get '/redemption_confirmation/:redemption_code' => 'coffee_gifts#confirm_redemption', as: "redemption_confirmation"
