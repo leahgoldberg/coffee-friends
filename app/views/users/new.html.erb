@@ -1,28 +1,30 @@
 <div class="row">
-  <div class="small-12 medium-9 medium-centered large-6 large-centered columns">
+  <div class="medium-4 large-5 columns">
+  </div>
 
-    <h1>Register</h1>
-
+  <div class="medium-4 large-5 columns">
+    <div class="row">
+      <h1>Send coffee.</h1>
+      <h4>Go ahead.  Make someone's day.</h4>
     <div id="register">
       <div id='fb-root'>
-
-        <%= link_to 'Register with Facebook', '#', id: 'fb-register-button' %>
-        <!-- <fb:login-button onlogin="fbLogin();"></fb:login-button> -->
+        <a href="#" id="fb-register-button" class="button">Sign Up With Facebook</a>
         <p id='fb-connect'></p>
         <p id='results'></p>
       </div>
+    </div>
 
       <div id='email-register'>
         <%= link_to 'Register with your email address', '#', id:'email-register-button' %>
 
-        <div class='email-register-form hidden'>
+        <div class='email-register-form'>
           <%= form_for @user, url: users_path do |f| %>
-            <%= f.text_field :first_name, placeholder: "First Name", label: false%>
-            <%= f.text_field :last_name, placeholder: "Last Name", label: false%>
-            <%= f.email_field :email, placeholder: "Email", label: false%>
-            <%= f.telephone_field :phone, placeholder: "Phone", maxlength: "10", label: false %>
-            <%= f.password_field :password, placeholder: "Password", label: false%>
-            <%= f.submit :Register, class: "button tiny" %>
+          <%= f.text_field :first_name, placeholder: "First Name", label: false%>
+          <%= f.text_field :last_name, placeholder: "Last Name", label: false%>
+          <%= f.email_field :email, placeholder: "Email", label: false%>
+          <%= f.telephone_field :phone, placeholder: "Phone", maxlength: "10", label: false %>
+          <%= f.password_field :password, placeholder: "Password", label: false%>
+          <%= f.submit :Register, class: "button tiny" %>
           <% end %>
         </div>
       </div>
