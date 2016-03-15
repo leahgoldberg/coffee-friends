@@ -1,10 +1,11 @@
 <div class="row">
   <div class="medium-4 large-5 columns">
+    <div style="height:500px;width:100%" id="mapOfCafes"></div>
+    <input id="address" type="hidden" value="183 Monroe ST, Brooklyn, NY">
   </div>
 
   <div class="medium-4 large-5 columns">
     <%= render @cafes %>
-    
   </div>
 </div>
 
@@ -15,13 +16,13 @@
       <a href="#panel1a" class="text-center">filter by borough</a>
       <div id="panel1a" class="content button-tags-container">
         <ul class="tags-topbar no-bullet">
-        <li><%= link_to "All", root_url, class: "tags-container button expand button-tag"%></li>
-        <li><%= link_to "The Bronx", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
-        <li><%= link_to "Brooklyn", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
-        <li><%= link_to "Manhattan", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
-        <li><%= link_to "Queens", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
-        <li><%= link_to "Staten Island", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
-      </ul>
+          <li><%= link_to "All", root_url, class: "tags-container button expand button-tag"%></li>
+          <li><%= link_to "The Bronx", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
+          <li><%= link_to "Brooklyn", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
+          <li><%= link_to "Manhattan", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
+          <li><%= link_to "Queens", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
+          <li><%= link_to "Staten Island", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
+        </ul>
       </div>
     </li>
   </ul>
@@ -29,7 +30,7 @@
 
 
 
-  </div>
+</div>
 </div>
 
 

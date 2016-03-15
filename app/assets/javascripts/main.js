@@ -1,6 +1,11 @@
 $(document).ready(function() {
 
   initRegistrationPopups();
+  
+  if ($('#mapOfCafes').length) {
+    initMapOfCafes();
+  }
+
 
   if ($('#map').length) {
     initMap();
