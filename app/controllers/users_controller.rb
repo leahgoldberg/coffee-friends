@@ -4,8 +4,12 @@ class UsersController < ApplicationController
   before_action :authorize_user, only: [:show]
 
   def new
-    @user = User.new
-    gon.fb_app_id = ENV['FB_APP_ID']
+    if current_user
+      redirect_to '/cafes'
+    else
+      @user = User.new
+      gon.fb_app_id = ENV['FB_APP_ID']
+    end
   end
 
   def authenticate
