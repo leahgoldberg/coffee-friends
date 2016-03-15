@@ -52,22 +52,18 @@ class CoffeeGiftsController < ApplicationController
 	def confirm_redemption
 	end
 
-	def confirm	
+	def confirm
 	end
 
 	private
 
 	def find_coffee_gift
-		if params[:id]
-			@coffee_gift = CoffeeGift.find_by(id: params[:id].split("-").first)
-		else	
-			@coffee_gift = CoffeeGift.find_by(redemption_code: params[:redemption_code])
-		end	
+		@coffee_gift = CoffeeGift.find_by(redemption_code: params[:redemption_code])
 	end
 
 	def find_cafe
 		@cafe = @coffee_gift.cafe
-	end	
+	end
 
 	def authorize_user
 		find_coffee_gift

@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 	end
 
 	def sent_or_received_coffee?(coffee_gift)
-		sent_coffee? || received_coffee?
+		sent_coffee?(coffee_gift) || received_coffee?(coffee_gift)
 	end
 
 	def unredeemed_coffee_gifts

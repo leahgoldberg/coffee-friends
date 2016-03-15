@@ -1,5 +1,6 @@
 $header-bar-color: #f4f4f4;;
 $body-color: #e1e3e4;
+$lightest-gray: #f6f6f6;
 $raspberry-logo-color: #D15271;
 $maroon-text-color: #5e0231;
 $light-blue: #60C2D2;
@@ -36,7 +37,7 @@ body {background-color: $body-color;}
 }
 
 .add_margin {
-  margin: 2%;
+  margin: 3%;
 }
 
 /* Cafe Profile Table */
@@ -45,10 +46,47 @@ body {background-color: $body-color;}
     padding: 0px 2px
 }
 
+#cafe_gifts_table_wrapper {
+  font-family: 'Nunito', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-weight: lighter;
+}
+
 .card-expiry-month {
   width: 50px
 }
 
 .card-expiry-year {
   width: 60px
+}
+
+/* Redemption Confirmation */
+
+.pricing-table {
+  li:first-child {
+    padding-top: 25px;
+  }
+  li:nth-child(2) {
+    font-size: 1.5em;
+  }
+}
+
+.redeem-button {
+  background-color: $lightest-gray;
+  padding-top: 20px;
+  text-align: center;
+}
+
+/* Redemption Modal */
+
+#confirm-warn-modal {
+  .popupHeader, .popupBody {
+    text-align: center;
+  }
+  .popupBody p:nth-child(2) {
+    margin-top: -10px;
+    font-size: 0.9rem;
+  }
+  input[type="submit"] {
+    margin-top: 10px;
+  }
 }

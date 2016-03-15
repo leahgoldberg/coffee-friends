@@ -1,4 +1,4 @@
-<% if current_user && current_user.sent_coffee?(@coffee_gift) %>
+<!-- <% if current_user && current_user.sent_coffee?(@coffee_gift) %>
 
 <div class="row low_content">
   <div class="small-12 columns">
@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<% else %>
+<% else %> -->
 
 <% if @coffee_gift.redeemed %>
 <div class="row low_content">
@@ -28,15 +28,10 @@
 <div class="row low_content">
   <div class="small-12 columns ">
     <ul class="pricing-table add_margin">
-      <li class="price"> <%=@coffee_gift.giver.first_name.capitalize%> <%=@coffee_gift.giver.last_name.capitalize%> sent you a <span class="bold"><%=@coffee_gift.name%>! </span></li>
-      <li class="price">Bring this to your barista at <%=@cafe.name%> to redeem:</li>
-      <center>
-          <br><br>
-          <%= link_to "Redeem", "#confirm-warn-modal", id: "redeem_button", rel:"leanModal" %>
-<br><br><br>
-          </li>
-        </center>
-        <li class="price">Here's the location of <span class="bold"><%=@cafe.name%></span>
+      <li class="price"> <%=@coffee_gift.giver.first_name.capitalize%> <%=@coffee_gift.giver.last_name.capitalize%> sent you a <span class="bold"><%=@coffee_gift.name%> at <%=@cafe.name%>! </span></li>
+      <li class="price">Bring this to your barista at to redeem:</li>
+      <li class="redeem-button"><%= link_to "Redeem", "#confirm-warn-modal", class: 'button success', id: "redeem_button", rel:"leanModal" %></li>
+        <li class="price">Here's the location of <span class="bold"><%=@cafe.name%>:</span>
           <hr>
           <div style="height:350px;width:100%" id="map"></div>
           <input id="address" type="hidden" value="<%=@cafe.address%>">
@@ -47,23 +42,22 @@
   </div>
 
   <div id="confirm-warn-modal" class="popupContainer">
-      <header class="popupHeader">
+    <header class="popupHeader">
       <h3 class="header_title">CONFIRMATION</h3>
       <div class="modal_close"><%= image_tag("grey-close.png") %></div>
     </header>
+
     <section class="popupBody">
-          <%= form_for @coffee_gift, :url => "/redeem/#{@coffee_gift.redemption_code}" do |f| %>
-          Ask your barista to press this button.
-          Once you hit redeem, your coffee is gone!
-          <%= hidden_field_tag "_method", "put" %>
-          <br>
-          <%= f.submit "Redeem" %>
-          <% end%>
-   </section>
-
- </div>  
+      <p>Ask your barista to press this button.</p>
+      <p>Once you hit redeem, your coffee is gone!</p>
+      <%= form_for @coffee_gift, :url => "/redeem/#{@coffee_gift.redemption_code}" do |f| %>
+      <%= hidden_field_tag "_method", "put" %>
+      <%= f.submit "Redeem" %>
+      <% end%>
+    </section>
+  </div>
 
 
  <% end %>
 
- <% end %>
+ <!-- <% end %> -->
