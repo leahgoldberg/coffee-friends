@@ -22,7 +22,7 @@ class UserSessionsController < ApplicationController
       else
         flash[:login_error] = "Incorrect email or password"
       end
-      redirect_to root_url
+      redirect_to '/cafes'
     end
   end
 

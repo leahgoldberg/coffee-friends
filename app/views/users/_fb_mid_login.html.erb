@@ -1,11 +1,15 @@
 <%=image_tag("#{@user.image_url}")%>
 <p><%=@user.full_name%></p>
 <p><%=@user.email%></p>
-
+<div class="row"
 <div id="fb-mid-login-form">
+<div class="large-6 columns end">
+
   <%= form_for(@user, url: users_path, method: 'POST') do |f| %>
     <%= f.text_field :phone, placeholder: "Phone", label: false %>
     <%= f.password_field :password, placeholder: "Password", label: false %>
-    <%= f.submit "Register", class: "button round" %>
+    <%= f.submit "Sign up with FB", class: "button" %>
   <% end %>
+</div>  
+</div>
 </div>

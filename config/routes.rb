@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  root 'cafes#index'
-
+  root 'users#new'
+  
   get '/cafes/login' => 'cafe_sessions#new'
   get '/cafes/profile' => 'cafes#show'
   post '/cafes/borough' => 'cafes#borough'
