@@ -1,6 +1,6 @@
 window.fbAsyncInit = function() {
   FB.init({
-    appId  : gon.fb_app_id, 
+    appId  : gon.fb_app_id,
     status : true,
     cookie : true,
     xfbml  : true,
@@ -24,6 +24,7 @@ $(function() {
           type: 'GET'
         }).done(function(json) {
           $('#register').html(json);
+          $('.phone').mask("(999) 999-9999",{placeholder:" "});
         });
       }
     }, { scope: 'email,user_friends'});

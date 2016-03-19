@@ -2,11 +2,12 @@ class CoffeeGift < ActiveRecord::Base
 	belongs_to :menu_item
 	belongs_to :receiver, class_name: :User
 	belongs_to :giver, class_name: :User
-	
+
 	delegate :name, to: :menu_item
 	delegate :cafe, to: :menu_item
 	delegate :price, to: :menu_item
 
+	before_validation :strip_special_chars_from_phone
 	before_save :generate_slug, :set_redemption_code
 
 	validates_presence_of :menu_item
@@ -39,6 +40,10 @@ class CoffeeGift < ActiveRecord::Base
 
 	def generate_slug
 		self.slug = self.name.parameterize
+	end
+
+	def strip_special_chars_from_phone
+		self.phone = self.phone.gsub(/\(|\)|-| /,'')
 	end
 
 end

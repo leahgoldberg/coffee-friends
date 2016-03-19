@@ -1,5 +1,9 @@
 @import "foundation/components/panels";
 
+.flash-notice {
+  text-align: center;
+}
+
 .success-panel {
   @include panel(
     $bg:#E0F0B2

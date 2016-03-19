@@ -65,8 +65,16 @@ body {background-color: $body-color;}
   li:first-child {
     padding-top: 25px;
   }
-  li:nth-child(2) {
+  .price {
+    @media(max-width: 40em) {
+      font-size: 1.4em;
+    }
+  }
+  .smaller {
     font-size: 1.5em;
+    @media(max-width: 40em) {
+      font-size: 1.2em;
+    }
   }
 }
 

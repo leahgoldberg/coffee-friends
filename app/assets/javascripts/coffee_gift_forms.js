@@ -9,6 +9,7 @@ function initGiftFormDropdown() {
       var modData = data.replace("$menu_item_id", itemId);
       formContainer.html(modData);
       initDropdowns();
+      $('.phone').mask("(999) 999-9999",{placeholder:" "});
     }).fail(function(){console.log("failure to retrieve data");});
   });
 
@@ -26,7 +27,3 @@ function initGiftFormDropdown() {
     };
   };
 };
-
-
-
-
