@@ -29,7 +29,7 @@
   <div class="small-12 columns ">
     <ul class="pricing-table add_margin">
       <li class="price"> <%=@coffee_gift.giver.first_name.capitalize%> <%=@coffee_gift.giver.last_name.capitalize%> sent you a <span class="bold"><%=@coffee_gift.name%> at <%=@cafe.name%>! </span></li>
-      <li class="price">Bring this to your barista at to redeem:</li>
+      <li class="price">Bring this to your barista to redeem:</li>
       <li class="redeem-button"><%= link_to "Redeem", "#confirm-warn-modal", class: 'button success', id: "redeem_button", rel:"leanModal" %></li>
         <li class="price">Here's the location of <span class="bold"><%=@cafe.name%>:</span>
           <hr>
