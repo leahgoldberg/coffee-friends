@@ -10,9 +10,9 @@
             <%= @coffee_gift.errors[:reciever].first %>
             </div>
 
-            <%= f.text_field :phone, placeholder: "Option 2: Enter a phone number", maxlength: "10", label: false %>
+            <%= f.telephone_field :phone, placeholder: "Option 2: Enter a phone number", maxlength: "10", label: false, class: "phone" %>
             <%= @coffee_gift.errors[:phone].first %>
-          
+
             <%= f.text_area :message, size: "30x6", placeholder: "Include a personal note!", label: false  %>
 
             <%= f.hidden_field :menu_item, :value => "$menu_item_id" %>

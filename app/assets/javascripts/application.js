@@ -7,6 +7,5 @@
 //= require chosen.proto.min.js
 //= require cloudinary
 //= require jquery.payment.min.js
+//= require jquery.maskedinput.min.js
 $(function(){ $(document).foundation(); });
-
-

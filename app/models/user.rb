@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 	validates_format_of :phone, with: /\d{10}/, message: "is not in the correct format"
 	validates :password, length: {minimum: 6}, :on => :create
 
+	before_validation :strip_special_chars_from_phone
 	before_save :extract_username, :set_names_based_on_provider
 
 	def received_coffee?(coffee_gift)
@@ -26,7 +27,7 @@ class User < ActiveRecord::Base
 	end
 
 	def sent_or_received_coffee?(coffee_gift)
-		sent_coffee? || received_coffee?
+		sent_coffee?(coffee_gift) || received_coffee?(coffee_gift)
 	end
 
 	def unredeemed_coffee_gifts
@@ -76,6 +77,10 @@ class User < ActiveRecord::Base
 
 	def set_full_name
 		self.full_name = [self.first_name, self.last_name].join(' ')
+	end
+
+	def strip_special_chars_from_phone
+		self.phone = self.phone.gsub(/\(|\)|-| /,'')
 	end
 
 end

@@ -34,4 +34,6 @@ $(document).ready(function() {
     initConfirmWarnModal();
   }
 
+  $('.phone').mask("(999) 999-9999",{placeholder:" "});
+
 });

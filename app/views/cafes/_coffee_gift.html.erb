@@ -3,8 +3,8 @@
     <td><%=gift.giver.full_name%></td>
     <td><%=gift.receiver ? gift.receiver.full_name : gift.phone %></td>
     <td><%=gift.redemption_code%></td>
-    <td><%=number_to_currency(gift.price, unit: '$')%></td>
-    <td><%=number_to_currency(gift.price * 0.7, unit: '$') %></td>
     <td><%=gift.redeemed%></td>
     <td></td>
-  </tr>  
+    <td><%=number_to_currency(gift.price, unit: '$')%></td>
+    <td><%=number_to_currency(gift.price * 0.7, unit: '$') %></td>
+  </tr>

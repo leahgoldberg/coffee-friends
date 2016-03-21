@@ -1,6 +1,6 @@
 <hr>
 <div id="cafe_profile" class="row">
-  <div class="small-12 medium-9 medium-centered columns">
+  <div class="small-12 medium-12 medium-centered columns">
 
     <table id="cafe_gifts_table">
       <thead>
@@ -8,23 +8,23 @@
         <th>Sender</th>
         <th>Receiver</th>
         <th>Confirmation Code</th>
-        <th>Gross</th>
-        <th>Net</th>
         <th>Redeeemed?</th>
         <th>Payment Status</th>
+        <th>Gross</th>
+        <th>Net</th>
       </thead>
       <tfoot>
         <tr>
-          <th colspan="4" style="text-align:right">Page Total:</th>
+          <th colspan="6" style="text-align:right">Page Total:</th>
           <th></th>
           <th></th>
         </tr>
       </tfoot>
 
       <tbody>
-        <%= render partial: 'cafes/coffee_gift', collection: @coffee_gifts, as: :gift %> 
-      </tbody>  
-    </table>    
+        <%= render partial: 'cafes/coffee_gift', collection: @coffee_gifts, as: :gift %>
+      </tbody>
+    </table>
 
   </div>
 </div>

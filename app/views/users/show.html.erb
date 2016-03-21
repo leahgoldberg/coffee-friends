@@ -17,7 +17,7 @@
         <ul class="no-bullet">
           <li><span class="bold">username:</span> <%= @user.username %></li>
           <li><span class="bold">email:</span> <%= @user.email %></li>
-          <li><span class="bold">phone:</span> <%= @user.phone %></li>
+          <li><span class="bold">phone:</span> <%= format_phone(@user.phone) %></li>
         </ul>
         <div class="panel">
           <h5>Send coffee to a friend</h5>
@@ -52,7 +52,7 @@
             <% if @user.given_coffees %>
             <div id="given" class="content">
               <br>
-              <%= render partial: "coffee_gifts/coffee_gift", locals: {coffee_gifts: @given_coffees } %>
+              <%= render partial: "coffee_gifts/sent_coffee_gift", locals: {coffee_gifts: @given_coffees } %>
             </div>
             <%end%>
           </li>

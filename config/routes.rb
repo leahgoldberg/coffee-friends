@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :menu_items, only: [:destroy, :create, :update]
-  resources :coffee_gifts, only: [:show, :update]
+  resources :coffee_gifts, only: [:update]
   resources :transactions, only: [:new, :create]
 
   resources :users, only: [:create, :edit, :update]
