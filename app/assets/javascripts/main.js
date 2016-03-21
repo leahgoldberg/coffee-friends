@@ -6,7 +6,6 @@ $(document).ready(function() {
     initMapOfCafes();
   }
 
-
   if ($('#map').length) {
     initMap();
   }
