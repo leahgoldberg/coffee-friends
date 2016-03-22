@@ -1,3 +1,11 @@
+$header-bar-color: #f4f4f4;;
+$body-color: #e1e3e4;
+$lightest-gray: #f6f6f6;
+$raspberry-logo-color: #D15271;
+$maroon-text-color: #5e0231;
+$light-blue: #60C2D2;
+$darker-blue: #49A4B3;
+
 #lean_overlay {
   position: fixed;
   z-index:100;
@@ -120,13 +128,31 @@ a.btn_red  {
   padding: 20px;
 }
 
+.registration-forms {
+  h1 {
+    font-weight: bold;
+  }
+}
+
 #fb-register-button {
-background-color: #007095;
+  background-color: $light-blue;
+  border: $darker-blue;
+}
+
+#fb-register-button:hover {
+  background-color: $darker-blue;
+  border: $darker-blue;
+}
+
+#email-register {
+  a {
+    color: $light-blue;
+  }
+  a:hover {
+    color: $darker-blue;
+  }
 }
 
 .email-register-form{
-display: none;
+  display: none;
 }
-
-
-

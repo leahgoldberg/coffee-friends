@@ -1,43 +1,33 @@
 <div class="row">
   <div class="medium-4 large-5 columns">
-  <img src="http://pngimg.com/upload/cup_PNG1964.png" align='right'>
+    <!-- <img src="http://pngimg.com/upload/cup_PNG1964.png" align='right'> -->
   </div>
 
   <div class="medium-4 large-5 columns">
-    <div class="row">
+    <div class="row registration-forms">
       <h1>Send coffee.</h1>
       <h4>Go ahead.  Make someone's day.</h4>
-    <div id="register">
-      <div id='fb-root'>
-        <a href="#" id="fb-register-button" class="button">Sign Up With Facebook</a>
-        <p id='fb-connect'></p>
-        <p id='results'></p>
+      <div id="register">
+        <div id='fb-root'>
+          <a href="#" id="fb-register-button" class="button round">Register With Facebook</a>
+          <p id='fb-connect'></p>
+          <p id='results'></p>
+        </div>
       </div>
-    </div>
-      <div class="row">
-  <div class="medium-4 large-5 columns">
 
-        <h5>OR</h5>
-</div>
-      </div>
       <div id='email-register'>
-        <%= link_to 'Register with your email address', '#', id:'email-register-button' %>
-        <div class="row">
-
-        <div class='email-register-form'>
-          <div class="large-6 columns end">
-
-          <%= form_for @user, url: users_path do |f| %>
-          <%= f.text_field :first_name, placeholder: "First Name", label: false%>
-          <%= f.text_field :last_name, placeholder: "Last Name", label: false%>
-          <%= f.email_field :email, placeholder: "Email", label: false%>
-          <%= f.telephone_field :phone, placeholder: "Phone", maxlength: "10", label: false, class: "phone" %>
-          <%= f.password_field :password, placeholder: "Password", label: false%>
-          <%= f.submit :Register, class: "button" %>
-          <% end %>
-        </div>
-        </div>
+        <p>Or <%= link_to 'with your email address', '#', id:'email-register-button' %></p>
       </div>
+
+      <div class='email-register-form'>
+        <%= form_for @user, url: users_path do |f| %>
+        <%= f.text_field :first_name, placeholder: "First Name", label: false%>
+        <%= f.text_field :last_name, placeholder: "Last Name", label: false%>
+        <%= f.email_field :email, placeholder: "Email", label: false%>
+        <%= f.telephone_field :phone, placeholder: "Phone", maxlength: "10", label: false, class: "phone" %>
+        <%= f.password_field :password, placeholder: "Password", label: false%>
+        <%= f.submit :Register, class: "button" %>
+        <% end %>
       </div>
     </div>
   </div>

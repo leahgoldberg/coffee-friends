@@ -12,17 +12,18 @@ class UserSessionsController < ApplicationController
       else
         flash[:cafe_error] = "Incorrect email or password"
         redirect_to root_path
-      end      
+      end
 
 
     else
       user = User.find_by(email: user_session_params[:email].downcase)
       if user && user.authenticate(user_session_params[:password].downcase)
         log_in_user(user)
+        redirect_to cafes_path
       else
         flash[:login_error] = "Incorrect email or password"
+        redirect_to root_path
       end
-      redirect_to '/cafes'
     end
   end
 
