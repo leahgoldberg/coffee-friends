@@ -16,9 +16,9 @@ class UsersController < ApplicationController
   def create
     @user = construct_user(user_params)
     if @user.save
+      remove_facebook_info_from_session
       log_in_user(@user)
       @user.find_associated_coffees
-      remove_facebook_info_from_session
       if @user.provider=='facebook'
         render js: "window.location = '#{cafes_path}'"
       else

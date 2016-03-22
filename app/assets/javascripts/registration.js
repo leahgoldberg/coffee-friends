@@ -3,7 +3,10 @@ function initRegistrationPopups() {
 
 	$("#email-register-button").on("click", function(e){
 		e.preventDefault();
-		$(".email-register-form").toggle('fast');
+		$("#register").hide();
+		$("#filler").hide();
+		$("#email-register").hide();
+		$(".email-register-form").show().addClass('email-register-style');
 	})
 
 	if ($("#user-login-errors").text().length > 5) {

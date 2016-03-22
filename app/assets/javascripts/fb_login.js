@@ -45,6 +45,8 @@ function handleRegistrationErrors() {
 }
 
 function loadLoginForm(form_string) {
+  $('#filler').hide();
+  $('#email-register').hide();
   $('#register').html(form_string);
   $('.phone').mask("(999) 999-9999",{placeholder:" "});
   handleRegistrationErrors();

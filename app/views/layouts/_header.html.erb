@@ -5,7 +5,7 @@
     <div id="logo-wrapper">
     <li class="name">
     <div id="logo">
-      <%= image_tag("coffee_logo.png") %>
+      <%= image_tag("coffee_logo.png", class: 'show-for-small-only') %>
       <h1 class="show-for-medium-up"><%= link_to "coffee friends", root_path %></h1>
       <h1 class="show-for-small-only"><%= link_to "cf", root_path %></h1>
     </div>
@@ -20,10 +20,10 @@
   <section class="top-bar-section">
     <ul class="right">
       <% if user_logged_in? %>
-      <li><%= link_to "#{current_user.first_name}'s profile", profile_path %></li>
+      <li><%= link_to "#{current_user.first_name}'s Profile", profile_path %></li>
       <li><%= link_to "log out", logout_path, method: :delete %></li>
       <% elsif cafe_logged_in? %>
-      <li><%= link_to "#{current_cafe.name}'s profile", cafes_profile_path %></li>
+      <li><%= link_to "#{current_cafe.name}'s Profile", cafes_profile_path %></li>
       <li><%= link_to "log out", cafes_logout_path, method: :delete %></li>
       <% else %>
       <li><%= link_to "log in", "#login-modal", id:"login-modal-trigger", rel:"leanModal" %></li>
@@ -32,5 +32,3 @@
   </section>
 </nav>
 </div>
-
-

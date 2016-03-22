@@ -6,16 +6,11 @@ $light-blue: #60C2D2;
 $darker-blue: #49A4B3;
 $steel: #666666;
 
-.footer hr {
-    border: 0;
-    height: 1px;
-    background: $darker-blue;
-    background-image: -webkit-linear-gradient(left, #ccc, $darker-blue, #ccc);
-    background-image:    -moz-linear-gradient(left, #ccc, $darker-blue, #ccc);
-    background-image:     -ms-linear-gradient(left, #ccc, $darker-blue, #ccc);
-    background-image:      -o-linear-gradient(left, #ccc, $darker-blue, #ccc);
-}
-
-.footer p {
+footer {
+  border-top: $body-color 1px solid;
+  p {
+    margin-top: 20px;
+    font-size: 10pt;
     color: $steel;
+  }
 }
