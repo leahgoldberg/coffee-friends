@@ -7,9 +7,9 @@ $light-blue: #60C2D2;
 $darker-blue: #49A4B3;
 
 
-body {background-color: $lightest-gray;}
+body {background-color: $lightest-gray !important;}
 
-.row { background-color: $lightest-gray; }
+.row { background-color: $lightest-gray !important; }
 
 .cafes-container {background-color: $body-color;}
 
