@@ -1,5 +1,5 @@
-<li><figure>
-  <%= link_to cl_image_tag(cafe.image_url, :width => 500, :height => 400, :crop => :fill ), cafe %>
+<figure>
+  <%= link_to cl_image_tag(cafe.image_url, :width => 300, :height => 100, :crop => :fill ), cafe %>
   <figcaption>
     <h4><%= link_to cafe.name, cafe %></h4>
     <span>
@@ -12,4 +12,4 @@
     </span>
     <br>
   </figcaption>
-</figure></li>
+</figure>

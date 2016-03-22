@@ -2,7 +2,7 @@ class CafesController < ApplicationController
 
   def index
     @cafes = Cafe.all
-    gon.cafes = @cafes[1 .. 5]
+    gon.cafes = @cafes
     if request.xhr?
       render @cafes
     else

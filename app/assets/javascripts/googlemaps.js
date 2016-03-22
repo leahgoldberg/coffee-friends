@@ -20,33 +20,38 @@ function initMap() {
 
 function initMapOfCafes() {
   var geocoder = new google.maps.Geocoder();
-  var center = new google.maps.LatLng(40.685550, -73.951532);
+  var center = new google.maps.LatLng(40.712239,-73.957136);
   var mapOptions = {
-    'zoom': 10,
+    'zoom': 12,
     'center': center,
     'mapTypeId': google.maps.MapTypeId.ROADMAP
   };
+
   var map = new google.maps.Map(document.getElementById("mapOfCafes"), mapOptions);
-  var cafeMarkers = [];
-  for (i = 0; i < gon.cafes.length; i++){
-    var cafe = gon.cafes[i];
-    geocoder.geocode( { 'address': cafe.address}, function(results, status) {
+  
+  for (var i = 0; i < gon.cafes.length; i++){
+    geocoder.geocode({ 'address': gon.cafes[i].address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
-        var latLng = new google.maps.LatLng(results[0].geometry.location.lat(), 
-          results[0].geometry.location.lng());
-        var marker = new google.maps.Marker({'position': latLng});
-        cafeMarkers.push(marker);
+        var latLng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+        cafeMarker = new google.maps.Marker({'position': latLng, 'map': map});
+        console.log(results[0].formatted_address);
+        attachSecretMessage(cafeMarker, results[0].formatted_address);
       } 
       else {
         console.log("Geocode was not successful for the following reason: " + status);
       }
     });
-  var markerCluster = new MarkerClusterer(map, cafeMarkers);
-
   }
 };
 
 
+function attachSecretMessage(marker, secretMessage) {
 
+  var infowindow = new google.maps.InfoWindow({
+    content: secretMessage
+  });
 
-
+  marker.addListener('click', function() {
+    infowindow.open(marker.get('map'), marker);
+  });
+}
