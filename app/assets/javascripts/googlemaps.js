@@ -34,6 +34,7 @@ function initMapOfCafes() {
       if (status == google.maps.GeocoderStatus.OK) {
         var latLng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
         cafeMarker = new google.maps.Marker({'position': latLng, 'map': map});
+        console.log(cafeMarker);
         console.log(results[0].formatted_address);
         attachSecretMessage(cafeMarker, results[0].formatted_address);
       } 
