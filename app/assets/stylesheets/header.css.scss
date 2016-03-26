@@ -67,6 +67,7 @@ $darker-blue: #49A4B3;
 
   .top-bar-section li:not(.has-form) a:not(.button):hover {
  	background: $header-bar-color;
+	color: $maroon-text-color; 
 	border-bottom: $body-color 1px solid;
  }
 

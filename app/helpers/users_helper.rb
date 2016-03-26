@@ -24,7 +24,8 @@ module UsersHelper
     oauth_token: session[:oauth_token],
     oauth_expires_at: session[:oauth_expires_at],
     phone: params[:phone],
-    password: params[:password])
+    password: params[:password],
+    source: params[:source])
   end
 
   def remove_facebook_info_from_session
