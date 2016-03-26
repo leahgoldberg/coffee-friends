@@ -3,6 +3,7 @@ class CafesController < ApplicationController
   def index
     @cafes = Cafe.all
     gon.cafes = @cafes
+    @coffee_gift = CoffeeGift.new
     if request.xhr?
       render @cafes
     else

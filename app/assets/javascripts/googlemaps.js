@@ -57,9 +57,10 @@ function attachCafeInfo(marker, cafe) {
     infowindow.setContent(marker.cafeInfo.name);
     infowindow.open(marker.get('map'), marker);
     var divID = '#cafe_div_id_' + marker.cafeInfo.id;
-    window.location.href = divID; 
     $(".cafe_menu").addClass('hide');
     $(divID + " .cafe_menu").removeClass('hide'); 
+    window.location.href = divID; 
+
   });
 }
 
