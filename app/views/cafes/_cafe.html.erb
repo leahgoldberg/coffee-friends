@@ -1,4 +1,4 @@
-<%= content_tag :div, id:"cafe_div_id_#{cafe.id}" do %>
+<%= content_tag :div, class:"cafe_list_div", id:"cafe_div_id_#{cafe.id}" do %>
   <figure>
     <%= cl_image_tag(cafe.image_url, :width => 300, :height => 100, :crop => :fill ) %>
     <figcaption>

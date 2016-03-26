@@ -4,6 +4,7 @@ $(document).ready(function() {
   
   if ($('#mapOfCafes').length) {
     initMapOfCafes();
+    setClickListenersToCafes();
   }
 
   if ($('#map').length) {
