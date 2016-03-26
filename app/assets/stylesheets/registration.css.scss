@@ -1,3 +1,19 @@
+$header-bar-color: #f4f4f4;;
+$body-color: #e1e3e4;
+$lightest-gray: #f6f6f6;
+$raspberry-logo-color: #D15271;
+$maroon-text-color: #5e0231;
+$light-blue: #60C2D2;
+$darker-blue: #49A4B3;
+$steel: #666666;
+
+.homepage {
+  margin: 4% auto;
+  .registration-wrapper {
+    margin-top: 4%;
+  }
+}
+
 #lean_overlay {
   position: fixed;
   z-index:100;
@@ -120,13 +136,71 @@ a.btn_red  {
   padding: 20px;
 }
 
-#fb-register-button {
-background-color: #007095;
+.logo-img {
+  width: 80%;
+  margin: 0 0 0 16%;
 }
 
-.email-register-form{
-display: none;
+#registration-forms {
+  margin: 0;
+  text-align: center;
+  h1 {
+    font-weight: bold;
+    font-size: 30pt;
+  }
+  h4 {
+    font-size: 16pt;
+  }
+  #filler {
+    height: 75px;
+  }
+  #register {
+    margin-top: 25px;
+    #fb-root {
+      text-align: center;
+    }
+    #fb-register-button {
+      background-color: $light-blue;
+      border: $darker-blue;
+    }
+    #fb-register-button:hover {
+      background-color: $darker-blue;
+      border: $darker-blue;
+    }
+    img {
+      margin-bottom: 10px;
+    }
+    #fb-user-info {
+      color: $steel;
+      p:first-child {
+        margin: 0;
+      }
+    }
+    .fb-register-form {
+      width: 100%;
+      form {
+        display: inline-block;
+      }
+    }
+  }
+  #email-register {
+    margin-top: -30px;
+    p {
+      color: $maroon-text-color;
+    }
+    a {
+      color: $light-blue;
+    }
+    a:hover {
+      color: $darker-blue;
+    }
+  }
+  .email-register-form {
+    display: none;
+  }
+  .email-register-style {
+    display: inline-block !important;
+    width: 60%;
+    margin-top: 15px;
+  }
 }
-
-
-

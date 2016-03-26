@@ -1,15 +1,18 @@
-<%=image_tag("#{@user.image_url}")%>
-<p><%=@user.full_name%></p>
-<p><%=@user.email%></p>
+<%=cl_image_tag("#{@user.image_url}", :transformation=>[
+  {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"crop"},
+  {:width=>100}])%>
+  <div id="fb-user-info">
+    <p><%=@user.full_name%></p>
+    <p><%=@user.email%></p>
+  </div>
 <div class="row"
-<div id="fb-mid-login-form">
-<div class="large-6 columns end">
-
-  <%= form_for(@user, url: users_path, method: 'POST') do |f| %>
-    <%= f.telephone_field :phone, placeholder: "Phone", label: false, class:"phone" %>
-    <%= f.password_field :password, placeholder: "Password", label: false %>
-    <%= f.submit "Sign up with FB", class: "button" %>
-  <% end %>
-</div>
-</div>
+  <div id="fb-mid-login-form">
+    <div class="large-6 columns fb-register-form end">
+      <%= form_for(@user, url: users_path, method: 'POST') do |f| %>
+      <%= f.telephone_field :phone, placeholder: "Phone", label: false, class:"phone" %>
+      <%= f.password_field :password, placeholder: "Password", label: false %>
+      <%= f.submit "Sign up with FB", class: "button round" %>
+      <% end %>
+    </div>
+  </div>
 </div>

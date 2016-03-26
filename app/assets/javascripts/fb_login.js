@@ -1,6 +1,6 @@
 window.fbAsyncInit = function() {
   FB.init({
-    appId  : gon.fb_app_id,
+    appId  : '123242711377342',
     status : true,
     cookie : true,
     xfbml  : true,
@@ -22,27 +22,32 @@ $(function() {
         $.ajax({
           url: '/auth/facebook/callback',
           type: 'GET'
-        }).done(function(json) {
-          $('#register').html(json);
-          $('.phone').mask("(999) 999-9999",{placeholder:" "});
-        });
+        }).done(function(json) { loadLoginForm(json); });
       }
     }, { scope: 'email,user_friends'});
   });
-
-  // $('#fb-mid-login-form').submit(function(e) {
-  //   e.preventDefault();
-  //   $.ajax({
-  //     url: '/users',
-  //     type: 'POST',
-  //     data: $(this).serialize()
-  //   }).done(function(response) {
-  //     debugger
-  //     console.log('cool');
-  //   }).fail(function(response) {
-  //     debugger
-  //     console.log('wut');
-  //   })
-  // })
-
 });
+
+function handleRegistrationErrors() {
+  $('#fb-mid-login-form').submit(function(e) {
+    e.preventDefault();
+    $form = $(e.target);
+    $.ajax({
+      url: '/users',
+      type: 'POST',
+      data: $form.serialize()
+    }).done(function(response) {
+      if (response.includes('error')) { loadLoginForm(response);}
+    }).fail(function() {
+      console.log("Login was not successful")
+    })
+  })
+}
+
+function loadLoginForm(form_string) {
+  $('#filler').hide();
+  $('#email-register').hide();
+  $('#register').html(form_string);
+  $('.phone').mask("(999) 999-9999",{placeholder:" "});
+  handleRegistrationErrors();
+}

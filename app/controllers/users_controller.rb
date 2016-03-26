@@ -8,7 +8,6 @@ class UsersController < ApplicationController
       redirect_to '/cafes'
     else
       @user = User.new
-      gon.fb_app_id = ENV['FB_APP_ID']
     end
   end
 
@@ -21,14 +20,18 @@ class UsersController < ApplicationController
   def create
     @user = construct_user(user_params)
     if @user.save
+      remove_facebook_info_from_session
       log_in_user(@user)
       @user.find_associated_coffees
-      remove_facebook_info_from_session
-      redirect_to root_path
+      if @user.provider=='facebook'
+        render js: "window.location = '#{cafes_path}'"
+      else
+        redirect_to cafes_path
+      end
     else
       flash[:errors] = @user.errors.full_messages
       if @user.provider=='facebook'
-        render 'users/fb_mid_login'
+        render partial: 'users/fb_mid_login', locals: { user: @user }, layout: false
       else
         render 'new'
       end
