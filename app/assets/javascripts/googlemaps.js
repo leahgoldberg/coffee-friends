@@ -60,7 +60,7 @@ function attachCafeInfo(marker, cafe) {
     $(".cafe_menu").addClass('hide');
     $(divID + " .cafe_menu").removeClass('hide'); 
     window.location.href = divID; 
-
+    map.panTo(marker.getPosition());
   });
 }
 
