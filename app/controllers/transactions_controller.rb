@@ -13,7 +13,6 @@ class TransactionsController < ApplicationController
     @coffee_gift.assign_phone(params)
     Stripe.api_key = 'sk_test_0mqxelCW5qHVbdH2GYG43467'
     token = params[:stripeToken]
-    binding.pry
     if @coffee_gift.save
       begin
         charge = Stripe::Charge.create(
