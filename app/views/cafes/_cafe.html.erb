@@ -4,18 +4,13 @@
     <figcaption>
       <h4><%= link_to cafe.name, cafe %></h4>
       <span>
-        <% if cafe.neighborhood %>
-          <%= link_to cafe.neighborhood, cafes_neighborhood_path, class: "tag-container"%>
-        <% end %>
-        <% if cafe.borough %>
-          <%= link_to cafe.borough, cafes_borough_path, class: "tag-container"%>
-        <% end %>
         <div class="cafe_menu hide">
           <% cafe.menu_items.each_with_index do |item, i| %>
 
           <li class="accordion-navigation">
-
+            <a href="#">
             <%= render partial: "menu_items/display_item" ,locals: {menu_item: item} %>
+            </a>
           
           </li>
           <% i += 1 %>        
