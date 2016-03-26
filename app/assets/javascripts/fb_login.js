@@ -45,6 +45,7 @@ function handleRegistrationErrors() {
 }
 
 function loadLoginForm(form_string) {
+  $('#taglines').hide();
   $('#filler').hide();
   $('#email-register').hide();
   $('#register').html(form_string);

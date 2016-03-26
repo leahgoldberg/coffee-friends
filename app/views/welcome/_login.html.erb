@@ -11,17 +11,15 @@
     <% if flash[:login_error] %>
         <p><%= flash[:login_error] %></p>
     <% end %>
-    </div>  
+    </div>
 
     <section class="popupBody">
-     <%= form_for(:user_session, url: users_sessions_path) do |f| %>
-     <%= f.text_field :email, placeholder: "Email" , label: false%>
+     <%= form_for(:session, url: sessions_path) do |f| %>
+     <%= f.text_field :email_or_phone, placeholder: "Email or phone number" , label: false%>
      <%= f.password_field :password, placeholder: "Password", label: false%>
      <%= f.submit "Log in", class: "button tiny" %>
      <% end %>
    </section>
  </div>
-
- <%= render "welcome/cafe_login" %>
-
+ 
 </div>

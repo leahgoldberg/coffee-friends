@@ -23,14 +23,14 @@ class UsersController < ApplicationController
       remove_facebook_info_from_session
       log_in_user(@user)
       @user.find_associated_coffees
-      if @user.provider=='facebook'
+      if @user.source=='facebook'
         render js: "window.location = '#{cafes_path}'"
       else
         redirect_to cafes_path
       end
     else
       flash[:errors] = @user.errors.full_messages
-      if @user.provider=='facebook'
+      if @user.source=='facebook'
         render partial: 'users/fb_mid_login', locals: { user: @user }, layout: false
       else
         render 'new'
@@ -71,6 +71,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :phone, :picture)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :phone, :picture, :source)
   end
 end
