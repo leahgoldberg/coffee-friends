@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
   root 'users#new'
-  
-  get '/cafes/login' => 'cafe_sessions#new'
+
   get '/cafes/profile' => 'cafes#show'
   post '/cafes/borough' => 'cafes#borough'
   post '/cafes/neighborhood' => 'cafes#neighborhood'
@@ -17,20 +16,17 @@ Rails.application.routes.draw do
   resources :transactions, only: [:new, :create]
 
   resources :users, only: [:create, :edit, :update]
+  
   get '/register' => 'users#new'
   get '/auth/:provider/callback' => 'users#authenticate'
 
-  get '/login' => 'user_sessions#new'
-  post '/users/sessions' => 'user_sessions#create'
-  delete '/logout' => 'user_sessions#destroy'
+  get '/login' => 'sessions#new'
+  post '/sessions' => 'sessions#create'
+  delete '/logout' => 'sessions#destroy'
   get '/profile' => 'users#show'
 
   get '/confirmation/:id' => 'coffee_gifts#confirm', as: "confirmation"
   get '/redeem/:redemption_code' => 'coffee_gifts#show',  as: "redeem"
   put '/redeem/:redemption_code' => 'coffee_gifts#update'
   get '/redemption_confirmation/:redemption_code' => 'coffee_gifts#confirm_redemption', as: "redemption_confirmation"
-
-  post '/cafes/sessions' => 'cafe_sessions#create'
-  delete '/cafes/logout' => 'cafe_sessions#destroy'
-
 end
