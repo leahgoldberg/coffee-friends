@@ -13,8 +13,9 @@ class SessionsController < ApplicationController
 
 
     else
-      user = User.find_by(email: session_params[:email_or_phone].downcase)
-      if user && user.authenticate(session_params[:password].downcase)
+      user = User.find_by(email: session_params[:email_or_phone].downcase) ||
+             User.find_by(phone: session_params[:email_or_phone])
+      if user && user.authenticate(session_params[:password])
         log_in_user(user)
         redirect_to cafes_path
       else
