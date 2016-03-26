@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   initRegistrationPopups();
-  
+
   if ($('#mapOfCafes').length) {
     initMapOfCafes();
     setClickListenersToCafes();
@@ -29,6 +29,7 @@ $(document).ready(function() {
 
   if ($('.transaction-container').length) {
     initStripe();
+    initTransactionStyling();
   }
 
   if($('#confirm-warn-modal').length){

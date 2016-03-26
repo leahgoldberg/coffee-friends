@@ -1,85 +1,53 @@
-
-<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
-<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.8.1/jquery.validate.min.js"></script>
-
-
 <div class="row low_content">
   <div class="form-container radius-box glassy-bg small-10 small-centered medium-8 large-6 columns">
-
-    <% if flash[:alert] %>
-      <p class="alert"><%=flash[:alert]%></p>
-    <% end %>
-
-  <%= form_tag transactions_path do %>
-      <div class="add-border">
+    <%= form_tag transactions_path, method: 'POST', class: "transaction-form" do %>
       <div class="transaction-container">
 
-        <h1>Checkout</h1>
+        <div class="transaction-header">
+          <h1>Checkout</h1>
+        </div>
 
-        <!-- <form action="/" method="post" id="example-form" style="display: none;"> -->
-          <div class="form-row">
-            <%= telephone_field_tag :phone, nil, placeholder: "Enter your friend's phone number", maxlength: "10", label: false, class:"phone" %>
-            <%= @coffee_gift.errors[:phone].first %>
+        <div class="transaction-body">
+        <h3>You're sending <%=add_an_or_a(@menu_item.name.downcase)%> from <%=@cafe.name%> for <%=number_to_currency(@menu_item.price)%></h3>
+
+        <div class="form-row">
+          <%= telephone_field_tag :phone, nil, placeholder: "Enter your friend's phone number", maxlength: "10", class:"phone", label: false %>
+          <%= @coffee_gift.errors[:phone].first %>
+        </div>
+        <div class="form-row">
+          <%= text_area_tag :message, @coffee_gift.message, size: "30x3", placeholder: "(Optional) Include a personal note!", label: false %>
+        </div>
+        <div class="form-row">
+          <label>Card Number</label>
+          <input type="tel" maxlength="20" autocomplete="off" id="card-number" class="cc-number card-number stripe-sensitive required" placeholder="•••• •••• •••• ••••"  />
+        </div>
+        <div class="form-row">
+          <label>CVC</label>
+          <input type="text" maxlength="4" autocomplete="off" class="card-cvc stripe-sensitive required" placeholder="•••" />
+        </div>
+        <div class="form-row">
+          <label>Month / Year</label>
+          <div class="expiry-wrapper">
+            <select class="card-expiry-month stripe-sensitive required">
+            </select>
+            <select class="card-expiry-year stripe-sensitive required"></select>
           </div>
+        </div>
 
-          <div class="form-row">
-            <%= text_area_tag :message, @coffee_gift.message, size: "30x6", placeholder: "Include a personal note!", label: false  %>
-          </div>
+        <div class="errors">
+          <span class="payment-errors"></span>
+          <% if flash[:alert] %>
+            <p class="alert"><%=flash[:alert]%></p>
+          <% end %>
+        </div>
 
-            <div class="form-row">
-                <label>Card Number</label>
-                <input type="tel" maxlength="20" autocomplete="off" id="card-number" class="cc-number card-number stripe-sensitive required" placeholder="•••• •••• •••• ••••"  />
-            </div>
-
-            <div class="form-row">
-                <label>CVC</label>
-                <input type="text" maxlength="4" autocomplete="off" class="card-cvc stripe-sensitive required" placeholder="•••" />
-            </div>
-
-            <div class="form-row">
-                <label>Month / Year</label>
-                <div class="expiry-wrapper">
-                    <select class="card-expiry-month stripe-sensitive required">
-                    </select>
-                    <script type="text/javascript">
-                        var select = $(".card-expiry-month"),
-                            month = new Date().getMonth() + 1;
-                        for (var i = 1; i <= 12; i++) {
-                            select.append($("<option value='"+i+"' "+(month === i ? "selected" : "")+">"+i+"</option>"))
-                        }
-                    </script>
-                    <select class="card-expiry-year stripe-sensitive required"></select>
-                    <script type="text/javascript">
-                        var select = $(".card-expiry-year"),
-                            year = new Date().getFullYear();
-                        for (var i = 0; i < 12; i++) {
-                            select.append($("<option value='"+(i + year)+"' "+(i === 0 ? "selected" : "")+">"+(i + year)+"</option>"))
-                        }
-                    </script>
-                </div>
-            </div>
-
-            <button type="submit" name="submit-button" id="transaction-submit-button">Submit</button>
-            <span class="payment-errors"></span>
-        <!-- </form> -->
+        <div class="transaction-button">
+          <button type="submit" name="submit-button" class="button round" id="transaction-submit-button">Charge <%=number_to_currency(@menu_item.price)%></button>
+        </div>
 
       </div>
-      </div>
-      <div class="spacer"></div>
-<% end %>
-
-  </div>
+    </div>
+    <div class="spacer"></div>
+  <% end %>
 </div>
-
-  <script>
-    jQuery(function($) {
-      $('.cc-number').payment('formatCardNumber');
-
-      $.fn.toggleInputError = function(erred) {
-        this.parent('.form-group').toggleClass('has-error', erred);
-        return this;
-      };
-
-
-    });
-  </script>
+</div>

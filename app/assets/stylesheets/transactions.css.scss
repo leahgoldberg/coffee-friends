@@ -4,14 +4,57 @@ $raspberry-logo-color: #D15271;
 $maroon-text-color: #5e0231;
 $light-blue: #60C2D2;
 $darker-blue: #49A4B3;
+$gray-text: #666666;
+$header-gray: #EDEDED;
+$border-gray: #DDD;
 
-div.transaction-container {
-  border-top: 15px solid white;
-  border-right: 15px solid white;
-  border-bottom: 7px solid white;
-  border-left: 15px solid white;
-  background-color: white;
-}
-div.add-border {
+.transaction-container {
+  margin-top: 7%;
   border: 1px solid $light-blue;
+  background-color: white;
+  .transaction-header {
+    background-color: $header-gray;
+    border-bottom: 1px solid $border-gray;
+    border-top: 1px solid $light-blue;
+    margin-top: -1px;
+    padding: 3% 7% 1% 7%;
+  }
+  .transaction-body {
+    padding: 3% 7%;
+  }
+  h1 {
+    text-transform: uppercase;
+    text-align: center;
+    @media(max-width: 40em) {
+      font-size: 22pt;
+    }
+  }
+  h3 {
+    font-family: 'Nunito', sans-serif;
+    color: $raspberry-logo-color;
+    font-size: 12pt;
+    margin-bottom: 20px;
+    @media(max-width: 40em) {
+      font-size: 10pt;
+    }
+  }
+  label, select {
+    font-family: 'Nunito', sans-serif;
+    color: $gray-text;
+    @media(max-width: 40em) {
+      font-size: 10pt;
+    }
+  }
+  .errors {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 10pt;
+    color: red;
+  }
+  .transaction-button {
+    text-align: center;
+    button {
+      margin-top: 15px;
+    }
+  }
 }
