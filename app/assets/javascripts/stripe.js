@@ -50,7 +50,7 @@ function initStripe(){
       return Stripe.validateExpiry($(".card-expiry-month").val(),
       $(".card-expiry-year").val())
     }, "Please enter a valid expiration");
-    $(".transaction-form").validate({
+    $(".tranaction-form").validate({
       submitHandler: submit,
       rules: {
         "card-cvc" : {
