@@ -9,24 +9,33 @@
     <% if flash[:alert] %>
       <p class="alert"><%=flash[:alert]%></p>
     <% end %>
-    <form method="post" action="/transactions">
+
+  <%= form_tag transactions_path do %>
       <div class="add-border">
       <div class="transaction-container">
 
         <h1>Checkout</h1>
-    
-        <form action="/" method="post" id="example-form" style="display: none;">
-            
+
+        <!-- <form action="/" method="post" id="example-form" style="display: none;"> -->
+          <div class="form-row">
+            <%= telephone_field_tag :phone, nil, placeholder: "Enter your friend's phone number", maxlength: "10", label: false, class:"phone" %>
+            <%= @coffee_gift.errors[:phone].first %>
+          </div>
+
+          <div class="form-row">
+            <%= text_area_tag :message, @coffee_gift.message, size: "30x6", placeholder: "Include a personal note!", label: false  %>
+          </div>
+
             <div class="form-row">
                 <label>Card Number</label>
                 <input type="tel" maxlength="20" autocomplete="off" id="card-number" class="cc-number card-number stripe-sensitive required" placeholder="•••• •••• •••• ••••"  />
             </div>
-            
+
             <div class="form-row">
                 <label>CVC</label>
                 <input type="text" maxlength="4" autocomplete="off" class="card-cvc stripe-sensitive required" placeholder="•••" />
             </div>
-            
+
             <div class="form-row">
                 <label>Month / Year</label>
                 <div class="expiry-wrapper">
@@ -52,12 +61,12 @@
 
             <button type="submit" name="submit-button" id="transaction-submit-button">Submit</button>
             <span class="payment-errors"></span>
-        </form>
+        <!-- </form> -->
 
       </div>
       </div>
       <div class="spacer"></div>
-</form>
+<% end %>
 
   </div>
 </div>
@@ -74,4 +83,3 @@
 
     });
   </script>
-

@@ -5,16 +5,13 @@
       <h4><%= link_to cafe.name, cafe %></h4>
       <span>
         <div class="cafe_menu hide">
-          <% cafe.menu_items.each_with_index do |item, i| %>
-
-          <li class="accordion-navigation">
-            <a href="#">
-            <%= render partial: "menu_items/display_item" ,locals: {menu_item: item} %>
-            </a>
-          
-          </li>
-          <% i += 1 %>        
-          <%end%>
+        <%= form_for @coffee_gift, url: cafe_coffee_gifts_path(cafe) do |f| %>
+          <% cafe.menu_items.each do |item| %>
+            <%= radio_button_tag :menu_item, item.id %>
+            <%= label_tag :menu_item, "#{item.name}: #{format_price(item.price)}" %>
+          <% end %>
+          <%= f.submit "Send coffee!", :class=>"button expand send-coffee" %>
+        <% end %>
         </div>
       </span>
       <br>

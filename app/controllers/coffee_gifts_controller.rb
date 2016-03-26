@@ -18,17 +18,11 @@ class CoffeeGiftsController < ApplicationController
 	end
 
 	def create
-		cafe = Cafe.find_by(slug: params[:cafe_id])
-		coffee_gift = current_user.given_coffees.build(coffee_gift_params)
-		coffee_gift.assign_phone(params[:coffee_gift])
-		if coffee_gift.save
-			session[:tmp_id] = coffee_gift.id
-			session[:tmp_price] = coffee_gift.price
+		if menu_item = MenuItem.find_by(id: params[:menu_item])
+			session[:menu_item_id] = menu_item.id
 			redirect_to new_transaction_path
 		else
-			coffee_gift.destroy
-			flash[:error] = coffee_gift.errors.full_messages
-			redirect_to cafe_path(cafe)
+			redirect_to root_path
 		end
 	end
 
@@ -51,7 +45,7 @@ class CoffeeGiftsController < ApplicationController
 
 	def confirm_redemption
 	end
-
+	
 	def confirm
 	end
 
@@ -75,10 +69,6 @@ class CoffeeGiftsController < ApplicationController
 			flash[:error] = ["Please login to send coffee."]
 			redirect_to root_path
 		end
-	end
-
-	def coffee_gift_params
-		params.require(:coffee_gift).permit(:message, :phone, :charitable, :redeemed)
 	end
 
 end
