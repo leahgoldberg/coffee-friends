@@ -45,7 +45,7 @@ class CoffeeGiftsController < ApplicationController
 
 	def confirm_redemption
 	end
-	
+
 	def confirm
 	end
 

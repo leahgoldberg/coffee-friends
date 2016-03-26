@@ -39,7 +39,7 @@ class TransactionsController < ApplicationController
       phone: params[:phone],
       message: params[:message],
       menu_item: @menu_item,
-      receiver: User.find_by(phone: params[:phone])
+      receiver: User.find_by(phone: strip_special_chars_from_phone(params[:phone]))
     )
   end
 
@@ -57,5 +57,9 @@ class TransactionsController < ApplicationController
       redirect_to new_transaction_path
     end
   end
+
+	def strip_special_chars_from_phone(phone)
+		phone.gsub(/\(|\)|-| /,'')
+	end
 
 end
