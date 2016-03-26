@@ -1,15 +1,17 @@
-<figure>
-  <%= link_to cl_image_tag(cafe.image_url, :width => 300, :height => 100, :crop => :fill ), cafe %>
-  <figcaption>
-    <h4><%= link_to cafe.name, cafe %></h4>
-    <span>
-      <% if cafe.neighborhood %>
-        <%= link_to cafe.neighborhood, cafes_neighborhood_path, class: "tag-container"%>
-      <% end %>
-      <% if cafe.borough %>
-        <%= link_to cafe.borough, cafes_borough_path, class: "tag-container"%>
-      <% end %>
-    </span>
-    <br>
-  </figcaption>
-</figure>
+<%= content_tag :div, id:"cafe_div_id_#{cafe.id}" do %>
+  <figure>
+    <%= link_to cl_image_tag(cafe.image_url, :width => 300, :height => 100, :crop => :fill ), cafe %>
+    <figcaption>
+      <h4><%= link_to cafe.name, cafe %></h4>
+      <span>
+        <% if cafe.neighborhood %>
+          <%= link_to cafe.neighborhood, cafes_neighborhood_path, class: "tag-container"%>
+        <% end %>
+        <% if cafe.borough %>
+          <%= link_to cafe.borough, cafes_borough_path, class: "tag-container"%>
+        <% end %>
+      </span>
+      <br>
+    </figcaption>
+  </figure>
+<% end %>
