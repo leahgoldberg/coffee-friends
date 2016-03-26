@@ -28,6 +28,8 @@ function initMapOfCafes() {
   
   //global map element
   map = new google.maps.Map(document.getElementById("mapOfCafes"), mapOptions);
+  //global infowindow
+  infowindow = new google.maps.InfoWindow({});
 
   for (var i = 0; i < gon.cafes.length; i++){
     addCafeMarker(gon.cafes[i]);
@@ -36,11 +38,11 @@ function initMapOfCafes() {
 }
 function addCafeMarker(cafe){
   var geocoder = new google.maps.Geocoder();
-  console.log(cafe);
   geocoder.geocode({ 'address': cafe.address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       var latLng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
       cafeMarker = new google.maps.Marker({'position': latLng, 'map': map});
+      cafeMarker.cafeInfo = cafe;
       attachCafeInfo(cafeMarker, cafe);
     } 
     else {
@@ -50,11 +52,10 @@ function addCafeMarker(cafe){
 }
 
 function attachCafeInfo(marker, cafe) {
-  var infowindow = new google.maps.InfoWindow({
-    content: cafe.id.toString()
-  });
-
+  console.log(marker.cafeInfo.name);
   marker.addListener('click', function() {
+    console.log(marker.cafeInfo.name);
+    infowindow.setContent(marker.cafeInfo.name);
     infowindow.open(marker.get('map'), marker);
   });
 }
