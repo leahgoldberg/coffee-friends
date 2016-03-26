@@ -7,16 +7,11 @@ class CoffeeGift < ActiveRecord::Base
 	delegate :cafe, to: :menu_item
 	delegate :price, to: :menu_item
 
+	before_validation :strip_special_chars_from_phone
 	before_save :generate_slug, :set_redemption_code
 
 	validates_presence_of :menu_item
 	validates_presence_of :phone, unless: Proc.new { |gift| gift.charitable }
-
-	def assign_phone(params)
-		phone = strip_special_chars_from_phone(params[:phone])
-		self.receiver = User.find_by(phone: phone)
-		self.phone = self.receiver.phone if self.receiver
-	end
 
 	def to_param
 		"#{self.id}-#{slug}"
@@ -41,7 +36,7 @@ class CoffeeGift < ActiveRecord::Base
 		self.slug = self.name.parameterize
 	end
 
-	def strip_special_chars_from_phone(phone)
-		phone.gsub(/\(|\)|-| /,'')
+	def strip_special_chars_from_phone
+		self.phone = self.phone.gsub(/\(|\)|-| /,'')
 	end
 end

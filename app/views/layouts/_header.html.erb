@@ -20,10 +20,10 @@
   <section class="top-bar-section">
     <ul class="right">
       <% if user_logged_in? %>
-      <li><%= link_to "#{current_user.first_name}'s Profile", profile_path %></li>
+      <li><%= link_to "#{current_user.first_name.downcase}'s profile", profile_path %></li>
       <li><%= link_to "log out", logout_path, method: :delete %></li>
       <% elsif cafe_logged_in? %>
-      <li><%= link_to "#{current_cafe.name}'s Profile", cafes_profile_path %></li>
+      <li><%= link_to "#{current_cafe.name.downcase}'s profile", cafes_profile_path %></li>
       <li><%= link_to "log out", logout_path, method: :delete %></li>
       <% else %>
       <li><%= link_to "log in", "#login-modal", id:"login-modal-trigger", rel:"leanModal" %></li>

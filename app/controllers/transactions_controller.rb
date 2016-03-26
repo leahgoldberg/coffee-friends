@@ -4,41 +4,22 @@ class TransactionsController < ApplicationController
 
   def new
     authenticate_user
-    # authorize_user
     @coffee_gift = CoffeeGift.new
   end
 
   def create
-    @coffee_gift = current_user.given_coffees.build(message: params[:message], menu_item: @menu_item)
-    @coffee_gift.assign_phone(params)
-    Stripe.api_key = 'sk_test_0mqxelCW5qHVbdH2GYG43467'
-    token = params[:stripeToken]
+    @coffee_gift = construct_coffee_gift
     if @coffee_gift.save
-      begin
-        charge = Stripe::Charge.create(
-          :amount => @coffee_gift.stripe_price,
-          :currency => "usd",
-          :source => token,
-          :description => "COFFEEPAL, LLC"
-          )
-      rescue Stripe::CardError => e
-        redirect_to transactions_path
-      end
+      create_stripe_charge
+      flash[:notice] = "Success!"
+      flash[:twilio_error] = TwilioTextSender.new(@coffee_gift).send!
+      redirect_to confirmation_path(@coffee_gift)
     else
-      redirect_to transactions_path
+      redirect_to new_transaction_path
     end
-    flash[:notice] = "Success!"
-    flash[:twilio_error] = TwilioTextSender.new(@coffee_gift).send!
-    redirect_to confirmation_path(@coffee_gift)
   end
 
   private
-
-  # def authorize_user
-  #   unless current_user.sent_or_received_coffee?(@coffee_gift)
-  #     redirect_to root_path
-  #   end
-  # end
 
   def authenticate_user
     unless current_user
@@ -50,5 +31,31 @@ class TransactionsController < ApplicationController
   def find_menu_item
     @menu_item = MenuItem.find_by(id: session[:menu_item_id])
     @cafe = @menu_item.cafe
+    redirect_to root_path unless @menu_item
   end
+
+  def construct_coffee_gift
+    current_user.given_coffees.build(
+      phone: params[:phone],
+      message: params[:message],
+      menu_item: @menu_item,
+      receiver: User.find_by(phone: params[:phone])
+    )
+  end
+
+  def create_stripe_charge
+    Stripe.api_key = ENV['STRIPE_SECRET']
+    begin
+      charge = Stripe::Charge.create(
+        :amount => @coffee_gift.stripe_price,
+        :currency => "usd",
+        :source => params[:stripeToken],
+        :description => "COFFEEPAL, LLC"
+        )
+    rescue Stripe::CardError => e
+      flash[:alert] = "An unexpected error has occured with your payment. Please try again."
+      redirect_to new_transaction_path
+    end
+  end
+
 end
