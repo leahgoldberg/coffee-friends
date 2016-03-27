@@ -8,10 +8,35 @@ $gray-text: #666666;
 $header-gray: #EDEDED;
 $border-gray: #DDD;
 
+.form-container {
+  @media(max-width: 40em) {
+    padding: 0;
+  }
+}
 .transaction-container {
   margin-top: 7%;
   border: 1px solid $light-blue;
   background-color: white;
+  .row {
+    background-color: white !important;
+    @media(max-width: 40em) {
+      padding: 0 3%;
+    }
+    .cvc {
+      padding-left: 0;
+    }
+    .month-year {
+      @media(max-width: 40em) {
+        padding-left: 0;
+      }
+    }
+    .card-expiry-year {
+      width: 30%;
+    }
+    .card-expiry-month {
+      width: 20%;
+    }
+  }
   .transaction-header {
     background-color: $header-gray;
     border-bottom: 1px solid $border-gray;
@@ -41,6 +66,7 @@ $border-gray: #DDD;
   label, select {
     font-family: 'Nunito', sans-serif;
     color: $gray-text;
+    background-color: white;
     @media(max-width: 40em) {
       font-size: 10pt;
     }
@@ -54,7 +80,7 @@ $border-gray: #DDD;
   .transaction-button {
     text-align: center;
     button {
-      margin-top: 15px;
+      margin-top: 25px;
     }
   }
 }

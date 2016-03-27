@@ -51,29 +51,35 @@ $darker-blue: #49A4B3;
 	overflow: hidden !important;
 }
 
+.top-bar-section li a:not(.button),
+.top-bar-section li a:not(.button):hover {
+	background:white;
+	color: $raspberry-logo-color;
+	border-bottom: $body-color 1px solid;
+	@media(max-width: 40em) {
+		border-top: $body-color 1px solid;
+	}
+}
+
 .top-bar-section li a:not(.button) {
-    background:white;
-    color: $raspberry-logo-color;
-		border-bottom: $body-color 1px solid;
-		font-size: 11pt;
+	font-size: 11pt;
 }
 
 .top-bar-section li a:not(.button):hover {
-    background:white;
-    color: $maroon-text-color;
-    font-weight: 700;
-		border-bottom: $body-color 1px solid;
+  font-weight: 700;
  }
 
- .top-bar-section li:not(.has-form) a:not(.button) {
- 	background: $header-bar-color;
-	border-bottom: $body-color 1px solid;
- }
+ .top-bar-section li:not(.has-form) a:not(.button),
+ .top-bar-section li:not(.has-form) a:not(.button):hover {
+	 background: $header-bar-color;
+	 border-bottom: $body-color 1px solid;
+	 @media(max-width: 40em) {
+		 border-top: $body-color 1px solid;
+	 }
+}
 
   .top-bar-section li:not(.has-form) a:not(.button):hover {
- 	background: $header-bar-color;
 	color: $maroon-text-color;
-	border-bottom: $body-color 1px solid;
  }
 
 #logo-text {
