@@ -46,7 +46,8 @@ function handleRegistrationErrors() {
 
 function loadLoginForm(form_string) {
   $('#taglines').hide();
-  $('#filler').hide();
+  $('#filler').remove();
+  $("#small-logo-img").remove();
   $('#email-register').hide();
   $('#register').html(form_string);
   $('.phone').mask("(999) 999-9999",{placeholder:" "});
