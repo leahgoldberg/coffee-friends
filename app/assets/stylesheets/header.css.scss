@@ -20,8 +20,9 @@ $darker-blue: #49A4B3;
 		position: absolute;
 		width: 100%;
 		z-index: 1;
-		@media (max-width: 40em) {
-			left: 50px;
+		@media(max-width: 40em) {
+			top: 0;
+			left: -10px;
 		}
 	}
 	img {
@@ -35,6 +36,10 @@ $darker-blue: #49A4B3;
 .title-area .name h1 a {
 	font-family: "Pacifico", sans-serif;
 	font-size: 18pt;
+	@media(max-width: 40em) {
+		font-size: 16pt;
+		width: 100%;
+	}
 }
 
 .title-area #logo-wrapper li {
@@ -67,7 +72,7 @@ $darker-blue: #49A4B3;
 
   .top-bar-section li:not(.has-form) a:not(.button):hover {
  	background: $header-bar-color;
-	color: $maroon-text-color; 
+	color: $maroon-text-color;
 	border-bottom: $body-color 1px solid;
  }
 

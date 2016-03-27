@@ -5,13 +5,16 @@
     </div>
   </div>
 
-  <div class="medium-4 columns end registration-wrapper">
+  <div class="large-4 medium-5 columns end registration-wrapper">
     <div class="row" id="registration-forms">
       <div id="taglines">
         <h1>Send coffee.</h1>
         <h4>Go ahead.  Make someone's day.</h4>
       </div>
-      <div id="filler"></div>
+      <div id="filler" class="show-for-large-up"></div>
+      <div id="small-logo-img" class="show-for-small-only">
+        <%= image_tag("coffee_logo.png") %>
+      </div>
       <div id="register">
         <div id='fb-root'>
           <a href="#" id="fb-register-button" class="button round">Register With Facebook</a>

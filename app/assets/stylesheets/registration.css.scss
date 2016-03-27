@@ -137,22 +137,37 @@ a.btn_red  {
 }
 
 .logo-img {
-  width: 80%;
-  margin: 0 0 0 16%;
+  @media(min-width: 64.063em) {
+    width: 80%;
+    margin: 0 0 0 16%;
+  }
+  @media(min-width: 40.063em) and (max-width: 64em) {
+    width: 90%;
+    margin: 6% 0 0 4%;
+  }
 }
 
 #registration-forms {
   margin: 0;
   text-align: center;
+  @media(min-width: 40em) {
+    margin-top: 4%;
+  }
   h1 {
     font-weight: bold;
     font-size: 30pt;
   }
   h4 {
     font-size: 16pt;
+    @media(min-width: 40em) {
+      font-size: 12pt;
+    }
   }
   #filler {
     height: 75px;
+  }
+  #small-logo-img {
+    margin: 11% 0;
   }
   #register {
     margin-top: 25px;
