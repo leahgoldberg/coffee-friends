@@ -3,17 +3,16 @@
     <%= cl_image_tag(cafe.image_url, :width => 300, :height => 100, :crop => :fill ) %>
     <figcaption>
       <h4><%=  cafe.name %></h4>
-      <span>
         <div class="cafe_menu hide">
         <%= form_for @coffee_gift, url: cafe_coffee_gifts_path(cafe) do |f| %>
           <% cafe.menu_items.each do |item| %>
+            <br>
             <%= radio_button_tag :menu_item, item.id %>
             <%= label_tag :menu_item, "#{item.name}: #{format_price(item.price)}" %>
-          <% end %>
-          <%= f.submit "Send coffee!", :class=>"button expand send-coffee" %>
+          <% end %><br>
+          <%= f.submit "Send coffee!", :class=>"button send-coffee" %>
         <% end %>
         </div>
-      </span>
       <br>
     </figcaption>
   </figure>
