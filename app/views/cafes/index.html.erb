@@ -14,10 +14,27 @@ $(window).resize(function() {
 
   }
 });
+
+$(window).load(function() {
+  var height = $(window).height();
+
+  if ($(window).width() < 641){
+    $("#mapOfCafes").height((height/2) - 79);
+    $(".cafes-list-view").height((height/2) - 79);
+    $(".footer").hide();
+  }
+  else{
+    $("#mapOfCafes").height(height);
+    $(".cafes-list-view").height(height);
+    $(".footer").show();
+
+  }
+});
 </script>
 
 <div class="row">
-  <div class="cafes-map-view small-12 medium-6 large-6 columns" id="mapOfCafes">
+  <div class="cafes-map-view small-12 medium-6 large-6 columns">
+   <div id="mapOfCafes"></div>
    <input id="address" type="hidden" value="183 Monroe ST, Brooklyn, NY" >
   </div>
   
