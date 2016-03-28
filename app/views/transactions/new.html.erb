@@ -1,3 +1,11 @@
+<script>
+ function disableButton(button) {
+     button.disabled = true;
+     button.value = "submitting...."
+     button.form.submit();
+}
+</script>
+
 <div class="row low_content">
   <div class="form-container radius-box glassy-bg small-10 small-centered medium-8 large-6 columns">
     <%= form_tag transactions_path, method: 'POST', class: "transaction-form" do %>
@@ -44,7 +52,7 @@
         </div>
 
         <div class="transaction-button">
-          <button type="submit" name="submit-button" class="button round" id="transaction-submit-button">Charge <%=number_to_currency(@menu_item.price)%></button>
+          <button type="submit" name="submit-button" class="button round" id="transaction-submit-button" onclick="disableButton(this)">Charge <%=number_to_currency(@menu_item.price)%></button>
         </div>
 
       </div>
