@@ -3,6 +3,8 @@ function initStripe(){
 
     $("#transaction-submit-button").on("click", function(e){
       e.preventDefault();
+      this.disabled = true;
+      this.value = "submitting...."
       form = $(event.target).closest('form');
       submit(form);
     });
