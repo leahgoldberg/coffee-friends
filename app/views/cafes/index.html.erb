@@ -1,36 +1,26 @@
+<script>
+$(window).resize(function() {
+  if ($(window).width() < 641){
+    height = $(window).height();
+    $("#mapOfCafes").height(height/2);
+  }
+  else{
+    $("#mapOfCafes").height(height);
+  }
+});
+</script>
+
 <div class="row">
-  <div class="cafes-map-view medium-4 large-6 columns">
-    <div style="height:100%;width:100%" id="mapOfCafes"></div>
-    <input id="address" type="hidden" value="183 Monroe ST, Brooklyn, NY">
+  <div class="cafes-map-view small-12 medium-6 large-6 columns" id="mapOfCafes" data-equalizer>
+   <input id="address" type="hidden" value="183 Monroe ST, Brooklyn, NY" data-equalizer-watch>
   </div>
-  <div class="cafes-list-view medium-4 large-6 columns">
+  
+  <div class="cafes-list-view small-12 medium-6 large-6 columns panel" data-equalizer-watch>
     <%= render @cafes %>
   </div>
 </div>
 
 
-<div class='show-for-small'>
-  <ul class="accordion" data-accordion>
-    <li class="accordion-navigation">
-      <a href="#panel1a" class="text-center">filter by borough</a>
-      <div id="panel1a" class="content button-tags-container">
-        <ul class="tags-topbar no-bullet">
-          <li><%= link_to "All", root_url, class: "tags-container button expand button-tag"%></li>
-          <li><%= link_to "The Bronx", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
-          <li><%= link_to "Brooklyn", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
-          <li><%= link_to "Manhattan", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
-          <li><%= link_to "Queens", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
-          <li><%= link_to "Staten Island", cafes_borough_path, class: "tags-container button expand button-tag"%></li>
-        </ul>
-      </div>
-    </li>
-  </ul>
-</div>
-
-
-
-</div>
-</div>
 
 
 
