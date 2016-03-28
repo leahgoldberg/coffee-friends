@@ -2,10 +2,15 @@
 $(window).resize(function() {
   if ($(window).width() < 641){
     height = $(window).height();
-    $("#mapOfCafes").height(height/2);
+    $("#mapOfCafes").height((height/2) - 79);
+    $(".cafes-list-view").height((height/2) - 79);
+    $(".footer").hide();
   }
   else{
     $("#mapOfCafes").height(height);
+    $(".cafes-list-view").height(height);
+    $(".footer").show();
+
   }
 });
 </script>
