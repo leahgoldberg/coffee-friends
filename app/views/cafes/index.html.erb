@@ -1,7 +1,8 @@
 <script>
 $(window).resize(function() {
+  var height = $(window).height();
+
   if ($(window).width() < 641){
-    height = $(window).height();
     $("#mapOfCafes").height((height/2) - 79);
     $(".cafes-list-view").height((height/2) - 79);
     $(".footer").hide();
@@ -16,11 +17,11 @@ $(window).resize(function() {
 </script>
 
 <div class="row">
-  <div class="cafes-map-view small-12 medium-6 large-6 columns" id="mapOfCafes" data-equalizer>
-   <input id="address" type="hidden" value="183 Monroe ST, Brooklyn, NY" data-equalizer-watch>
+  <div class="cafes-map-view small-12 medium-6 large-6 columns" id="mapOfCafes">
+   <input id="address" type="hidden" value="183 Monroe ST, Brooklyn, NY" >
   </div>
   
-  <div class="cafes-list-view small-12 medium-6 large-6 columns panel" data-equalizer-watch>
+  <div class="cafes-list-view small-12 medium-6 large-6 columns panel">
     <%= render @cafes %>
   </div>
 </div>
