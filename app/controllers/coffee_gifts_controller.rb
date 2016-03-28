@@ -52,7 +52,11 @@ class CoffeeGiftsController < ApplicationController
 	private
 
 	def find_coffee_gift
-		@coffee_gift = CoffeeGift.find_by(redemption_code: params[:redemption_code])
+		if CoffeeGift.find_by(redemption_code: params[:redemption_code])
+			@coffee_gift = CoffeeGift.find_by(redemption_code: params[:redemption_code])
+		elsif CoffeeGift.find_by(id: params[:id])
+			@coffee_gift = CoffeeGift.find_by(id: params[:id].split("-").first)
+		end	
 	end
 
 	def find_cafe
