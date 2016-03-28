@@ -75,15 +75,18 @@ function setClickListenersToCafes(){
   
   $(".cafe_list_div").click(function(e){
     divID = "#"+($(this).attr('id'));
-    $(".cafe_menu").addClass('hide');
-    $(divID + " .cafe_menu").removeClass('hide'); 
-    window.location.href = divID;
-    for(var i=0; i<markerList.length; i++){    
-      if(markerList[i].cafeInfo.divID == divID){
-        map.panTo(markerList[i].getPosition());
-        infowindow.setContent(markerList[i].cafeInfo.name);
-        infowindow.open(markerList[i].get('map'), markerList[i]);
+    console.log(divID);
+    if(e.target.tagName == "IMG"){
+      $(".cafe_menu").addClass('hide');
+      $(divID + " .cafe_menu").removeClass('hide'); 
+      window.location.href = divID;
+      for(var i=0; i<markerList.length; i++){    
+        if(markerList[i].cafeInfo.divID == divID){
+          map.panTo(markerList[i].getPosition());
+          infowindow.setContent(markerList[i].cafeInfo.name);
+          infowindow.open(markerList[i].get('map'), markerList[i]);
 
+        }
       }
     }
   });
