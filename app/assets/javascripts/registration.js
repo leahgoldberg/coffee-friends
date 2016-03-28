@@ -5,7 +5,8 @@ function initRegistrationPopups() {
 		e.preventDefault();
 		$("#register").hide();
 		$('#taglines').hide();
-		$("#filler").hide();
+		$("#filler").remove();
+		$("#small-logo-img").remove();
 		$("#email-register").hide();
 		$(".email-register-form").show().addClass('email-register-style');
 	})

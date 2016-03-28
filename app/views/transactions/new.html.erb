@@ -10,27 +10,29 @@
         <div class="transaction-body">
         <h3>You're sending <%=add_an_or_a(@menu_item.name.downcase)%> from <%=@cafe.name%> for <%=number_to_currency(@menu_item.price)%></h3>
 
-        <div class="form-row">
+        <div class="row">
           <%= telephone_field_tag :phone, nil, placeholder: "Enter your friend's phone number", maxlength: "10", class:"phone", label: false %>
           <%= @coffee_gift.errors[:phone].first %>
         </div>
-        <div class="form-row">
+        <div class="row">
           <%= text_area_tag :message, @coffee_gift.message, size: "30x3", placeholder: "(Optional) Include a personal note!", label: false %>
         </div>
-        <div class="form-row">
+        <div class="row">
           <label>Card Number</label>
           <input type="tel" maxlength="20" autocomplete="off" id="card-number" class="cc-number card-number stripe-sensitive required" placeholder="•••• •••• •••• ••••"  />
         </div>
-        <div class="form-row">
-          <label>CVC</label>
-          <input type="text" maxlength="4" autocomplete="off" class="card-cvc stripe-sensitive required" placeholder="•••" />
-        </div>
-        <div class="form-row">
-          <label>Month / Year</label>
-          <div class="expiry-wrapper">
-            <select class="card-expiry-month stripe-sensitive required">
-            </select>
-            <select class="card-expiry-year stripe-sensitive required"></select>
+        <div class="row">
+          <div class="medium-4 columns cvc">
+            <label>CVC</label>
+            <input type="text" maxlength="4" autocomplete="off" class="card-cvc stripe-sensitive required" placeholder="•••" />
+          </div>
+          <div class="medium-8 columns month-year">
+            <label>Month / Year</label>
+            <div class="expiry-wrapper">
+              <select class="card-expiry-month stripe-sensitive required">
+              </select>
+              <select class="card-expiry-year stripe-sensitive required"></select>
+            </div>
           </div>
         </div>
 

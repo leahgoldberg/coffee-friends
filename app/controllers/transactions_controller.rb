@@ -35,11 +35,12 @@ class TransactionsController < ApplicationController
   end
 
   def construct_coffee_gift
+    phone = strip_special_chars_from_phone(params[:phone])
     current_user.given_coffees.build(
-      phone: params[:phone],
+      phone: phone,
       message: params[:message],
       menu_item: @menu_item,
-      receiver: User.find_by(phone: strip_special_chars_from_phone(params[:phone]))
+      receiver: User.find_by(phone: phone)
     )
   end
 
