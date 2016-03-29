@@ -1,8 +1,8 @@
 class CoffeeGiftsController < ApplicationController
 
-	before_action :authenticate_user, except: [:update, :filter, :confirm_redemption, :show, :redemption_confirmation]
-	before_action :find_coffee_gift, only: [:update, :confirm, :show, :redemption_confirmation, :confirm_redemption]
-	before_action :find_cafe, except: [:new, :create, :update, :redemption_confirmation, :confirm_redemption]
+	before_action :authenticate_user, except: [:update, :confirm_redemption, :show]
+	before_action :find_coffee_gift, only: [:update, :confirm, :show]
+	before_action :find_cafe, only: [:show, :confirm] 
 
 	def new
 		if request.xhr?
@@ -30,14 +30,11 @@ class CoffeeGiftsController < ApplicationController
 		if @coffee_gift.update_attributes(redeemed: true)
 			flash[:notice] = "Coffee Redeemed!"
 			TwilioTextSender.new(@coffee_gift).send!
-			redirect_to redemption_confirmation_path
+			redirect_to confirm_redemption_path
 		else
 			flash[:error] = ["Unable to redeem voucher"]
 			redirect_to cafes_profile_path
 		end
-	end
-
-	def redemption_confirmation
 	end
 
 	def show
@@ -52,11 +49,7 @@ class CoffeeGiftsController < ApplicationController
 	private
 
 	def find_coffee_gift
-		if CoffeeGift.find_by(redemption_code: params[:redemption_code])
-			@coffee_gift = CoffeeGift.find_by(redemption_code: params[:redemption_code])
-		elsif CoffeeGift.find_by(id: params[:id])
-			@coffee_gift = CoffeeGift.find_by(id: params[:id].split("-").first)
-		end	
+		@coffee_gift = CoffeeGift.find_by(redemption_code: params[:redemption_code]) || CoffeeGift.find_by(id: params[:id].split("-").first)
 	end
 
 	def find_cafe

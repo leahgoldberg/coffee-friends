@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     if current_user
       redirect_to cafes_path
     elsif current_cafe
-      redirect_to cafes_profile_path  
+      redirect_to cafes_profile_path
     else
       remove_facebook_info_from_session
       @user = User.new

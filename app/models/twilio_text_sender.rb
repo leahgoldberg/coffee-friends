@@ -45,7 +45,7 @@ class TwilioTextSender
 		end
 
 		def redeem_message
-			"Your coffee has been redeemed! Do something nice and maybe someone will buy you another one."
+			"Your coffee has been redeemed! Do something nice and someone will buy you another one!"
 		end
 
 end

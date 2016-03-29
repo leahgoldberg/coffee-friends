@@ -15,18 +15,43 @@ window.fbAsyncInit = function() {
   }(document));
 
 $(function() {
+  checkLoginStatus();
   $('#fb-register-button').click(function(e) {
     e.preventDefault();
-    FB.login(function(response) {
-      if (response.authResponse) {
-        $.ajax({
-          url: '/auth/facebook/callback',
-          type: 'GET'
-        }).done(function(json) { loadLoginForm(json); });
-      }
-    }, { scope: 'email,user_friends'});
+    if (navigator.userAgent.match('CriOS')) {
+      fbManualRedirect();
+    } else {
+      FB.login(function(response) { authenticateFB(response) }, { scope: 'email,user_friends'});
+    }
   });
 });
+
+function fbManualRedirect() {
+  var fbRedirectUrl = 'https://www.facebook.com/dialog/oauth?client_id=';
+  var appID = '123242711377342';
+  var scope = '&scope=email,user_friends';
+  var url = fbRedirectUrl + appID + '&redirect_uri=' + document.location.href + scope;
+  Cookies.set('fb-chrome-ios', true);
+  window.open(url);
+}
+
+function checkLoginStatus() {
+  FB.getLoginStatus(function(response) {
+    if (response.status === 'connected' && Cookies.get('fb-chrome-ios') === 'true'){
+      Cookies.remove('fb-chrome-ios');
+      authenticateFB(response);
+    }
+  }, true);
+}
+
+function authenticateFB(response) {
+  if (response.authResponse) {
+    $.ajax({
+      url: '/auth/facebook/callback',
+      type: 'GET'
+    }).done(function(json) { loadLoginForm(json); });
+  }
+}
 
 function handleRegistrationErrors() {
   $('#fb-mid-login-form').submit(function(e) {
@@ -46,9 +71,9 @@ function handleRegistrationErrors() {
 
 function loadLoginForm(form_string) {
   $('#taglines').hide();
+  $('#email-register').hide();
   $('#filler').remove();
   $("#small-logo-img").remove();
-  $('#email-register').hide();
   $('#register').html(form_string);
   $('.phone').mask("(999) 999-9999",{placeholder:" "});
   handleRegistrationErrors();

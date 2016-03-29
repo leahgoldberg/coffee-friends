@@ -8,4 +8,5 @@
 //= require cloudinary
 //= require jquery.payment.min.js
 //= require jquery.maskedinput.min.js
+//= require jquery.cookie.min.js
 $(function(){ $(document).foundation(); });

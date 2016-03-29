@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :transactions, only: [:new, :create]
 
   resources :users, only: [:create, :edit, :update]
-  
+
   get '/register' => 'users#new'
   get '/auth/:provider/callback' => 'users#authenticate'
 
@@ -28,5 +28,5 @@ Rails.application.routes.draw do
   get '/confirmation/:id' => 'coffee_gifts#confirm', as: "confirmation"
   get '/redeem/:redemption_code' => 'coffee_gifts#show',  as: "redeem"
   put '/redeem/:redemption_code' => 'coffee_gifts#update'
-  get '/redemption_confirmation/:redemption_code' => 'coffee_gifts#confirm_redemption', as: "redemption_confirmation"
+  get '/confirm-redemption' => 'coffee_gifts#confirm_redemption', as: "confirm_redemption"
 end
