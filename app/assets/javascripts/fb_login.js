@@ -1,3 +1,5 @@
+console.log("URI", document.location.href);
+
 window.fbAsyncInit = function() {
   FB.init({
     appId  : '123242711377342',
@@ -77,4 +79,30 @@ function loadLoginForm(form_string) {
   $('#register').html(form_string);
   $('.phone').mask("(999) 999-9999",{placeholder:" "});
   handleRegistrationErrors();
+}
+
+
+function fbCompleteLogin(){
+  
+  FB.getLoginStatus(function(response) {
+    // Calling this with the extra setting "true" forces
+    // a non-cached request and updates the FB cache.
+    // Since the auth login elsewhere validated the user
+    // this update will now asyncronously mark the user as authed
+  }, true);
+  
+}
+
+
+function requireLogin(callback){
+
+    FB.getLoginStatus(function(response) {
+        if (response.status != "connected"){
+            showLogin();
+        }else{
+            checkAuth(response.authResponse.accessToken, response.authResponse.userID, function(success){
+              // Check FB tokens against your API to make sure user is valid
+            });
+        }
+    });
 }

@@ -4,14 +4,11 @@ $(window).resize(function() {
 
   if ($(window).width() < 641){
     $("#mapOfCafes").height((height/2) - 79);
-    $(".cafes-list-view").height((height/2) - 79);
-    $(".footer").hide();
+    $(".cafes-list-view").height((height/2) - 35);
   }
   else{
     $("#mapOfCafes").height(height);
     $(".cafes-list-view").height(height);
-    $(".footer").show();
-
   }
 });
 </script>

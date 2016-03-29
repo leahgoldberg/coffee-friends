@@ -1,3 +1,11 @@
+<script type="text/javascript">
+function handleAuth(){
+    // once the window is open 
+    window.opener.fbCompleteLogin();
+    window.close();    
+}
+</script>
+
 <div class="row homepage">
   <div class="medium-5 medium-offset-1 columns">
     <div class="logo-img">
@@ -23,7 +31,7 @@
         </div>
       </div>
 
-      <div id='email-register'>
+      <div id='email-register' onload="handleAuth()">
         <p>or <%= link_to 'with your email address', '#', id:'email-register-button' %></p>
       </div>
 
